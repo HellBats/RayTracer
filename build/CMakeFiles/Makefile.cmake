@@ -76,7 +76,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/glad.dir/DependInfo.cmake"
   "CMakeFiles/imgui.dir/DependInfo.cmake"
-  "CMakeFiles/cpu_renderer.dir/DependInfo.cmake"
+  "CMakeFiles/renderer.dir/DependInfo.cmake"
   "glfw/CMakeFiles/uninstall.dir/DependInfo.cmake"
   "glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake"

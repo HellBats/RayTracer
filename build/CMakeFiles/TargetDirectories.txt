@@ -1,6 +1,6 @@
 /home/hellbats/Code/RayTracer/build/CMakeFiles/glad.dir
 /home/hellbats/Code/RayTracer/build/CMakeFiles/imgui.dir
-/home/hellbats/Code/RayTracer/build/CMakeFiles/cpu_renderer.dir
+/home/hellbats/Code/RayTracer/build/CMakeFiles/renderer.dir
 /home/hellbats/Code/RayTracer/build/CMakeFiles/edit_cache.dir
 /home/hellbats/Code/RayTracer/build/CMakeFiles/rebuild_cache.dir
 /home/hellbats/Code/RayTracer/build/CMakeFiles/list_install_components.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/renderer.dir/src/Camera.cpp.o CMakeFiles/renderer.dir/src/Ray.cpp.o CMakeFiles/renderer.dir/src/Renderer.cpp.o CMakeFiles/renderer.dir/src/UI.cpp.o -o renderer  glfw/src/libglfw3.a libglad.a libimgui.a /usr/lib/x86_64-linux-gnu/librt.a -lm -ldl 

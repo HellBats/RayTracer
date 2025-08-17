@@ -188,17 +188,17 @@ imgui/fast:
 .PHONY : imgui/fast
 
 #=============================================================================
-# Target rules for targets named cpu_renderer
+# Target rules for targets named renderer
 
 # Build rule for target.
-cpu_renderer: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cpu_renderer
-.PHONY : cpu_renderer
+renderer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 renderer
+.PHONY : renderer
 
 # fast build rule for target.
-cpu_renderer/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/build
-.PHONY : cpu_renderer/fast
+renderer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/build
+.PHONY : renderer/fast
 
 #=============================================================================
 # Target rules for targets named uninstall
@@ -407,29 +407,101 @@ imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.s
 .PHONY : imgui/imgui_widgets.cpp.s
 
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+src/Camera.o: src/Camera.cpp.o
+.PHONY : src/Camera.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/Camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Camera.cpp.o
+.PHONY : src/Camera.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/Camera.i: src/Camera.cpp.i
+.PHONY : src/Camera.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/Camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Camera.cpp.i
+.PHONY : src/Camera.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/Camera.s: src/Camera.cpp.s
+.PHONY : src/Camera.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/Camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Camera.cpp.s
+.PHONY : src/Camera.cpp.s
+
+src/Ray.o: src/Ray.cpp.o
+.PHONY : src/Ray.o
+
+# target to build an object file
+src/Ray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Ray.cpp.o
+.PHONY : src/Ray.cpp.o
+
+src/Ray.i: src/Ray.cpp.i
+.PHONY : src/Ray.i
+
+# target to preprocess a source file
+src/Ray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Ray.cpp.i
+.PHONY : src/Ray.cpp.i
+
+src/Ray.s: src/Ray.cpp.s
+.PHONY : src/Ray.s
+
+# target to generate assembly for a file
+src/Ray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Ray.cpp.s
+.PHONY : src/Ray.cpp.s
+
+src/Renderer.o: src/Renderer.cpp.o
+.PHONY : src/Renderer.o
+
+# target to build an object file
+src/Renderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Renderer.cpp.o
+.PHONY : src/Renderer.cpp.o
+
+src/Renderer.i: src/Renderer.cpp.i
+.PHONY : src/Renderer.i
+
+# target to preprocess a source file
+src/Renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Renderer.cpp.i
+.PHONY : src/Renderer.cpp.i
+
+src/Renderer.s: src/Renderer.cpp.s
+.PHONY : src/Renderer.s
+
+# target to generate assembly for a file
+src/Renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Renderer.cpp.s
+.PHONY : src/Renderer.cpp.s
+
+src/UI.o: src/UI.cpp.o
+.PHONY : src/UI.o
+
+# target to build an object file
+src/UI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/UI.cpp.o
+.PHONY : src/UI.cpp.o
+
+src/UI.i: src/UI.cpp.i
+.PHONY : src/UI.i
+
+# target to preprocess a source file
+src/UI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/UI.cpp.i
+.PHONY : src/UI.cpp.i
+
+src/UI.s: src/UI.cpp.s
+.PHONY : src/UI.s
+
+# target to generate assembly for a file
+src/UI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/UI.cpp.s
+.PHONY : src/UI.cpp.s
 
 # Help Target
 help:
@@ -445,10 +517,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... uninstall"
 	@echo "... update_mappings"
-	@echo "... cpu_renderer"
 	@echo "... glad"
 	@echo "... glfw"
 	@echo "... imgui"
+	@echo "... renderer"
 	@echo "... external/glad/src/glad.o"
 	@echo "... external/glad/src/glad.i"
 	@echo "... external/glad/src/glad.s"
@@ -470,9 +542,18 @@ help:
 	@echo "... imgui/imgui_widgets.o"
 	@echo "... imgui/imgui_widgets.i"
 	@echo "... imgui/imgui_widgets.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/Camera.o"
+	@echo "... src/Camera.i"
+	@echo "... src/Camera.s"
+	@echo "... src/Ray.o"
+	@echo "... src/Ray.i"
+	@echo "... src/Ray.s"
+	@echo "... src/Renderer.o"
+	@echo "... src/Renderer.i"
+	@echo "... src/Renderer.s"
+	@echo "... src/UI.o"
+	@echo "... src/UI.i"
+	@echo "... src/UI.s"
 .PHONY : help
 
 

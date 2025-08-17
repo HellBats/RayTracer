@@ -8,7 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/hellbats/Code/RayTracer/src/main.cpp" "CMakeFiles/cpu_renderer.dir/src/main.cpp.o" "gcc" "CMakeFiles/cpu_renderer.dir/src/main.cpp.o.d"
+  "/home/hellbats/Code/RayTracer/src/Camera.cpp" "CMakeFiles/renderer.dir/src/Camera.cpp.o" "gcc" "CMakeFiles/renderer.dir/src/Camera.cpp.o.d"
+  "/home/hellbats/Code/RayTracer/src/Ray.cpp" "CMakeFiles/renderer.dir/src/Ray.cpp.o" "gcc" "CMakeFiles/renderer.dir/src/Ray.cpp.o.d"
+  "/home/hellbats/Code/RayTracer/src/Renderer.cpp" "CMakeFiles/renderer.dir/src/Renderer.cpp.o" "gcc" "CMakeFiles/renderer.dir/src/Renderer.cpp.o.d"
+  "/home/hellbats/Code/RayTracer/src/UI.cpp" "CMakeFiles/renderer.dir/src/UI.cpp.o" "gcc" "CMakeFiles/renderer.dir/src/UI.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

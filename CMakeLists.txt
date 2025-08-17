@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(CPURenderer)
+project(RayTracer)
 set(CMAKE_CXX_STANDARD 17)
 
 # GLFW
@@ -21,7 +21,8 @@ add_library(imgui
 )
 target_include_directories(imgui PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/backends)
 
-# Main executable
-add_executable(cpu_renderer src/main.cpp)
-target_link_libraries(cpu_renderer PRIVATE glfw glad imgui)
-target_include_directories(cpu_renderer PRIVATE external/glad/include)
+file(GLOB_RECURSE SRC_FILES src/*.cpp)
+add_executable(renderer ${SRC_FILES})
+target_link_libraries(renderer PRIVATE glfw glad imgui)
+target_include_directories(renderer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(renderer PRIVATE external/glad/include)

@@ -65,7 +65,7 @@ CMAKE_BINARY_DIR = /home/hellbats/Code/RayTracer/build
 # The main recursive "all" target.
 all: CMakeFiles/glad.dir/all
 all: CMakeFiles/imgui.dir/all
-all: CMakeFiles/cpu_renderer.dir/all
+all: CMakeFiles/renderer.dir/all
 all: glfw/all
 .PHONY : all
 
@@ -76,7 +76,7 @@ preinstall: glfw/preinstall
 # The main recursive "clean" target.
 clean: CMakeFiles/glad.dir/clean
 clean: CMakeFiles/imgui.dir/clean
-clean: CMakeFiles/cpu_renderer.dir/clean
+clean: CMakeFiles/renderer.dir/clean
 clean: glfw/clean
 .PHONY : clean
 
@@ -137,7 +137,7 @@ glfw/src/clean: glfw/src/CMakeFiles/update_mappings.dir/clean
 CMakeFiles/glad.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=3,4 "Built target glad"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=1,2 "Built target glad"
 .PHONY : CMakeFiles/glad.dir/all
 
 # Build rule for subdir invocation for target.
@@ -163,7 +163,7 @@ CMakeFiles/glad.dir/clean:
 CMakeFiles/imgui.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=50,51,52,53,54,55,56 "Built target imgui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=48,49,50,51,52,53,54 "Built target imgui"
 .PHONY : CMakeFiles/imgui.dir/all
 
 # Build rule for subdir invocation for target.
@@ -183,32 +183,32 @@ CMakeFiles/imgui.dir/clean:
 .PHONY : CMakeFiles/imgui.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/cpu_renderer.dir
+# Target rules for target CMakeFiles/renderer.dir
 
 # All Build rule for target.
-CMakeFiles/cpu_renderer.dir/all: CMakeFiles/glad.dir/all
-CMakeFiles/cpu_renderer.dir/all: CMakeFiles/imgui.dir/all
-CMakeFiles/cpu_renderer.dir/all: glfw/src/CMakeFiles/glfw.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=1,2 "Built target cpu_renderer"
-.PHONY : CMakeFiles/cpu_renderer.dir/all
+CMakeFiles/renderer.dir/all: CMakeFiles/glad.dir/all
+CMakeFiles/renderer.dir/all: CMakeFiles/imgui.dir/all
+CMakeFiles/renderer.dir/all: glfw/src/CMakeFiles/glfw.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=55,56,57,58,59 "Built target renderer"
+.PHONY : CMakeFiles/renderer.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/cpu_renderer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hellbats/Code/RayTracer/build/CMakeFiles 56
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/cpu_renderer.dir/all
+CMakeFiles/renderer.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hellbats/Code/RayTracer/build/CMakeFiles 59
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/renderer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hellbats/Code/RayTracer/build/CMakeFiles 0
-.PHONY : CMakeFiles/cpu_renderer.dir/rule
+.PHONY : CMakeFiles/renderer.dir/rule
 
 # Convenience name for target.
-cpu_renderer: CMakeFiles/cpu_renderer.dir/rule
-.PHONY : cpu_renderer
+renderer: CMakeFiles/renderer.dir/rule
+.PHONY : renderer
 
 # clean rule for target.
-CMakeFiles/cpu_renderer.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpu_renderer.dir/build.make CMakeFiles/cpu_renderer.dir/clean
-.PHONY : CMakeFiles/cpu_renderer.dir/clean
+CMakeFiles/renderer.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/clean
+.PHONY : CMakeFiles/renderer.dir/clean
 
 #=============================================================================
 # Target rules for target glfw/CMakeFiles/uninstall.dir
@@ -243,7 +243,7 @@ glfw/CMakeFiles/uninstall.dir/clean:
 glfw/src/CMakeFiles/glfw.dir/all:
 	$(MAKE) $(MAKESILENT) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/depend
 	$(MAKE) $(MAKESILENT) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49 "Built target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47 "Built target glfw"
 .PHONY : glfw/src/CMakeFiles/glfw.dir/all
 
 # Build rule for subdir invocation for target.
@@ -269,7 +269,7 @@ glfw/src/CMakeFiles/glfw.dir/clean:
 glfw/src/CMakeFiles/update_mappings.dir/all:
 	$(MAKE) $(MAKESILENT) -f glfw/src/CMakeFiles/update_mappings.dir/build.make glfw/src/CMakeFiles/update_mappings.dir/depend
 	$(MAKE) $(MAKESILENT) -f glfw/src/CMakeFiles/update_mappings.dir/build.make glfw/src/CMakeFiles/update_mappings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=57 "Built target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=60 "Built target update_mappings"
 .PHONY : glfw/src/CMakeFiles/update_mappings.dir/all
 
 # Build rule for subdir invocation for target.
