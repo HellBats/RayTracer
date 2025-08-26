@@ -10,15 +10,31 @@
 #include "include/Renderer.h"
 #include <chrono>
 #include <string>
+#include "include/Scene.h"
+#include "include/Geometry.h"
+#include <memory>
+#include <cuda_runtime.h>
 
 // Window size
 const int WINDOW_WIDTH = 1980;
 const int WINDOW_HEIGHT = 1080;
 
+
+
+bool HasCUDADevice() {
+    int deviceCount = 0;
+    cudaError_t error = cudaGetDeviceCount(&deviceCount);
+
+    if (error != cudaSuccess || deviceCount == 0) {
+        return false;  // No CUDA devices found
+    }
+    return true;
+}
+
 int main()
 {
-    int view_width = 1080;
-    int view_height = 720;
+    int view_width = 1480;
+    int view_height = 920;
     int side_panel_width = 300;
     std::random_device rd;
     std::mt19937 gen(rd()); // Mersenne Twister engine
@@ -61,7 +77,22 @@ int main()
 
     float slider = 400;
     float z = -500; 
-    Renderer Scene(pixels,view_width,view_height);
+    Renderer renderer(pixels,view_width,view_height);
+    Scene scene;
+    Camera camera = Camera(view_width,view_height,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,0.0f,0.0f));
+    scene.camera = &camera;
+    TriVertices tri = {.a=glm::vec3(0.0f,0.0f,-20.0f),.b=glm::vec3(-10.0f,0.0f,-50.0f),
+        .c=glm::vec3(0.0f,10.0f,-30.0f)};
+    Geometry g,g1;
+    g.type = GeometryType::Triangle;
+    InitalizeTriangle(g.triangle,tri);
+    g1.type = GeometryType::Sphere;
+    float  radius = 10.0f; 
+    glm::vec3 center = glm::vec3(0.0f,0.0f,-20.0f);
+    InitalizeSphere(g1.sphere,radius,center);
+    // scene.objects.push_back(std::make_unique<Sphere>(5.0f,glm::vec3(0.0f,0.0f,-30.0f)));
+    scene.initialize(10);
+    scene.push_objects(g);
     // ==== Main Loop ====
     while (!glfwWindowShouldClose(window))
     {
@@ -69,19 +100,17 @@ int main()
         glfwPollEvents();
         if(render)
         {
-            // ==== Fill pixel buffer with Random Noise====
-            // for (int y = 0; y < HEIGHT; y++)
-            // {
-            //     for (int x = 0; x < WIDTH; x++)
-            //     {
-            //         int idx = (y * WIDTH + x) * 4;
-            //         pixels[idx + 0] = dist(gen); // Red
-            //         pixels[idx + 1] = dist(gen); // Green
-            //         pixels[idx + 2] = dist(gen);                // Blue
-            //         pixels[idx + 3] = 255;                // Alpha
-            //     }
-            // }
-            Scene.Render();
+            if (HasCUDADevice()) 
+            {
+                // std::cout << "CUDA device found. Running on GPU.\n";
+                renderer.RenderGPU(scene);
+            } 
+            else 
+            {
+                // std::cout << "No CUDA device found. Falling back to CPU.\n";
+                renderer.RenderCPU(scene);
+            }
+            render = false;
         }
 
         // ==== Upload to GPU ====

@@ -5,6 +5,7 @@
 #include "imgui.h"
 #include "include/Camera.h"
 #include "include/Ray.h"
+#include "include/Scene.h"
 
 
 class Renderer
@@ -13,10 +14,13 @@ private:
     std::vector<unsigned char>& pixels;
     uint32_t width;
     uint32_t height;
-    Camera camera;
 public:
     Renderer(std::vector<unsigned char>& pixels,uint32_t width, uint32_t height);
-    int Render();
-    int SetCameraPos(glm::vec3 pos);
+    void RenderCPU(Scene &scene);
+    void RenderGPU(Scene &scene);
 };
+
+void RenderPixel(Scene &scene,uint32_t i, uint32_t j, glm::u8vec3 &color,int width, int height);
+bool Trace(Scene &scene,Ray &r, float* tNear,Geometry*& hitObject);
+
 

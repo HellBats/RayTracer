@@ -319,7 +319,42 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
  /usr/include/glm/detail/func_integer.inl \
  /home/hellbats/Code/RayTracer/src/include/Camera.h \
+ /usr/include/glm/gtc/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_projection.hpp \
+ /usr/include/glm/gtc/constants.hpp \
+ /usr/include/glm/ext/scalar_constants.hpp \
+ /usr/include/glm/ext/scalar_constants.inl \
+ /usr/include/glm/gtc/constants.inl \
+ /usr/include/glm/ext/matrix_projection.inl \
+ /usr/include/glm/ext/matrix_clip_space.hpp \
+ /usr/include/glm/ext/matrix_clip_space.inl \
+ /usr/include/glm/ext/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_transform.inl \
+ /usr/include/glm/gtc/matrix_transform.inl \
  /home/hellbats/Code/RayTracer/src/include/Ray.h \
- /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono.h \
- /usr/include/c++/13/ratio /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h
+ /home/hellbats/Code/RayTracer/src/include/Scene.h \
+ /home/hellbats/Code/RayTracer/src/include/Geometry.h \
+ /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/unique_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr_base.h \
+ /usr/include/c++/13/bits/allocated_ptr.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/ext/concurrence.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h /usr/include/c++/13/chrono \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/cuda_runtime.h /usr/include/crt/host_config.h \
+ /usr/include/builtin_types.h /usr/include/device_types.h \
+ /usr/include/crt/host_defines.h /usr/include/driver_types.h \
+ /usr/include/vector_types.h /usr/include/surface_types.h \
+ /usr/include/texture_types.h /usr/include/library_types.h \
+ /usr/include/channel_descriptor.h /usr/include/cuda_runtime_api.h \
+ /usr/include/cuda_device_runtime_api.h /usr/include/driver_functions.h \
+ /usr/include/vector_functions.h /usr/include/vector_functions.hpp \
+ /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h

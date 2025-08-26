@@ -12,3 +12,20 @@ class Ray
         glm::vec3 GetDirection();
         glm::vec3 CalculatePoint(float t);
 };
+
+class PrimaryRay : public Ray
+{
+
+};
+class ShadowRay : public Ray
+{
+
+};
+class ReflectionRay : public Ray
+{
+
+};
+class RefractionRay : public Ray
+{
+
+};
