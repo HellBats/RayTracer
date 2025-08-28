@@ -6,7 +6,7 @@
 
 
 typedef struct Scene {
-    Camera* camera;
+    Camera camera;
     Geometry* objects;
     uint32_t object_count;
 

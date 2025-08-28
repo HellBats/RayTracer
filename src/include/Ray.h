@@ -1,31 +1,17 @@
 #pragma once
+#include "include/math.h"
 #include <glm/glm.hpp>
+#include<cuda_runtime.h>
 
-class Ray
+struct Ray
 {
-    private:
-        glm::vec3 origin;
-        glm::vec3 direction;
-    public:
-        Ray(glm::vec3 origin, glm::vec3 direction);
-        glm::vec3 GetOrigin();
-        glm::vec3 GetDirection();
-        glm::vec3 CalculatePoint(float t);
+    vec3 origin;
+    vec3 direction;
 };
 
-class PrimaryRay : public Ray
-{
+void IntializeRay(Ray* ray,vec3* origin,vec3* direction);
 
-};
-class ShadowRay : public Ray
+__host__ __device__ __forceinline__ vec3 CalculatePoint(Ray &ray, float t)
 {
-
-};
-class ReflectionRay : public Ray
-{
-
-};
-class RefractionRay : public Ray
-{
-
+    return ray.origin + (ray.direction*t);
 };

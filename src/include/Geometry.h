@@ -1,27 +1,28 @@
 #pragma once
 #include "include/Ray.h"
 #include <memory>
+#include <cuda_runtime.h>
 
 
 typedef struct TriVertices {
-    glm::vec3 a, b, c;
+    vec3 a, b, c;
 }TriVertices;
 
 enum class GeometryType { Sphere, Plane, Triangle };
 
 typedef struct Sphere {
-    glm::vec3 center;
+    vec3 center;
     float radius;
 }Sphere;
 
 typedef struct Plane {
-    glm::vec3 point;
-    glm::vec3 normal;
+    vec3 point;
+    vec3 normal;
 }Plane;
 
 typedef struct Triangle {
     TriVertices vertices;
-    glm::vec3 normal;
+    vec3 normal;
     float origin_distance;
     bool is_double_sided;
 }Triangle;
@@ -35,10 +36,10 @@ typedef struct Geometry {
     };
 }Geometry;
 
-void InitalizeSphere(Sphere &sphere,float &radius, glm::vec3 &center);
-void InitalizePlane(Plane &plane,glm::vec3 &point, glm::vec3 &normal);
+void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center);
+void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal);
 void InitalizeTriangle(Triangle &triangle,TriVertices &vertices);
-bool Intersect(const Geometry& g,Ray& r, float& t);
-bool IntersectSphere(const Sphere &sphere,Ray& r,float& t);
-bool IntersectPlane(const Plane &plane ,Ray& r,float &t);
-bool IntersectTriangle(const Triangle &traingle,Ray& r,float &t);
+__host__ __device__ bool Intersect(Geometry& g,Ray& r, float& t);
+__host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,float& t);
+__host__ __device__ bool IntersectPlane(Plane &plane ,Ray& r,float &t);
+__host__ __device__ bool IntersectTriangle(Triangle &traingle,Ray& r,float &t);

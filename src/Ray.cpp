@@ -1,15 +1,13 @@
 #include "include/Ray.h"
 
 
-Ray::Ray(glm::vec3 origin, glm::vec3 direction)
+void IntializeRay(Ray* ray,vec3* origin,vec3* direction)
 {
-    this->origin.x = origin.x;
-    this->origin.y = origin.y;
-    this->origin.z = origin.z;
-    this->direction.x = direction.x;
-    this->direction.y = direction.y;
-    this->direction.z = direction.z;
-};
-glm::vec3 Ray::GetOrigin(){return origin;};
-glm::vec3 Ray::GetDirection(){return direction;};
-glm::vec3 Ray::CalculatePoint(float t){return origin+direction*t;};
+    ray->origin.x = origin->x;
+    ray->origin.y = origin->y;
+    ray->origin.z = origin->z;
+    ray->direction.x = direction->x;
+    ray->direction.y = direction->y;
+    ray->direction.z = direction->z;
+
+}

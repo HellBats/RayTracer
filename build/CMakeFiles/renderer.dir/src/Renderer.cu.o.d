@@ -435,6 +435,7 @@ CMakeFiles/renderer.dir/src/Renderer.cu.o : /home/hellbats/Code/RayTracer/src/Re
     /usr/include/glm/ext/matrix_transform.inl \
     /usr/include/glm/gtc/matrix_transform.inl \
     /home/hellbats/Code/RayTracer/src/include/Ray.h \
+    /home/hellbats/Code/RayTracer/src/include/math.h \
     /home/hellbats/Code/RayTracer/src/include/Scene.h \
     /home/hellbats/Code/RayTracer/src/include/Geometry.h \
     /usr/include/c++/12/memory \

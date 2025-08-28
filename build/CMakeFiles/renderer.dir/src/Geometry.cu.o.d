@@ -182,6 +182,12 @@ CMakeFiles/renderer.dir/src/Geometry.cu.o : /home/hellbats/Code/RayTracer/src/Ge
     /usr/include/c++/12/initializer_list \
     /home/hellbats/Code/RayTracer/src/include/Geometry.h \
     /home/hellbats/Code/RayTracer/src/include/Ray.h \
+    /home/hellbats/Code/RayTracer/src/include/math.h \
+    /usr/lib/gcc/x86_64-linux-gnu/12/include/stdint.h \
+    /usr/include/stdint.h \
+    /usr/include/x86_64-linux-gnu/bits/wchar.h \
+    /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+    /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
     /usr/include/glm/glm.hpp \
     /usr/include/glm/detail/_fixes.hpp \
     /usr/include/glm/detail/setup.hpp \
@@ -189,11 +195,6 @@ CMakeFiles/renderer.dir/src/Geometry.cu.o : /home/hellbats/Code/RayTracer/src/Ge
     /usr/include/c++/12/cstddef \
     /usr/include/glm/simd/platform.h \
     /usr/include/cuda.h \
-    /usr/lib/gcc/x86_64-linux-gnu/12/include/stdint.h \
-    /usr/include/stdint.h \
-    /usr/include/x86_64-linux-gnu/bits/wchar.h \
-    /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
-    /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
     /usr/include/c++/12/cstdint \
     /usr/include/c++/12/climits \
     /usr/include/c++/12/cfloat \

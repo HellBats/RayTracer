@@ -14,6 +14,7 @@
 #include "include/Geometry.h"
 #include <memory>
 #include <cuda_runtime.h>
+#include "include/math.h"
 
 // Window size
 const int WINDOW_WIDTH = 1980;
@@ -79,18 +80,17 @@ int main()
     float z = -500; 
     Renderer renderer(pixels,view_width,view_height);
     Scene scene;
-    Camera camera = Camera(view_width,view_height,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,0.0f,0.0f));
-    scene.camera = &camera;
-    TriVertices tri = {.a=glm::vec3(0.0f,0.0f,-20.0f),.b=glm::vec3(-10.0f,0.0f,-50.0f),
-        .c=glm::vec3(0.0f,10.0f,-30.0f)};
+    InitializeCamera(&scene.camera,view_width,view_height);
+    TriVertices tri = {.a=vec3{0.0f,0.0f,-20.0f},.b=vec3{-10.0f,0.0f,-50.0f},
+        .c=vec3{0.0f,10.0f,-30.0f}};
     Geometry g,g1;
     g.type = GeometryType::Triangle;
     InitalizeTriangle(g.triangle,tri);
     g1.type = GeometryType::Sphere;
     float  radius = 10.0f; 
-    glm::vec3 center = glm::vec3(0.0f,0.0f,-20.0f);
+    vec3 center = vec3{0.0f,0.0f,-20.0f};
     InitalizeSphere(g1.sphere,radius,center);
-    // scene.objects.push_back(std::make_unique<Sphere>(5.0f,glm::vec3(0.0f,0.0f,-30.0f)));
+    // scene.objects.push_back(std::make_unique<Sphere>(5.0f,vec3(0.0f,0.0f,-30.0f)));
     scene.initialize(10);
     scene.push_objects(g);
     // ==== Main Loop ====
@@ -110,7 +110,7 @@ int main()
                 // std::cout << "No CUDA device found. Falling back to CPU.\n";
                 renderer.RenderCPU(scene);
             }
-            render = false;
+            // render = false;
         }
 
         // ==== Upload to GPU ====

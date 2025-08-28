@@ -301,6 +301,7 @@ CMakeFiles/renderer.dir/src/Camera.cpp.o: /home/hellbats/Code/RayTracer/src/Came
 CMakeFiles/renderer.dir/src/Geometry.cu.o: /home/hellbats/Code/RayTracer/src/Geometry.cu \
   /home/hellbats/Code/RayTracer/src/include/Geometry.h \
   /home/hellbats/Code/RayTracer/src/include/Ray.h \
+  /home/hellbats/Code/RayTracer/src/include/math.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -738,8 +739,10 @@ CMakeFiles/renderer.dir/src/Geometry.cu.o: /home/hellbats/Code/RayTracer/src/Geo
 
 CMakeFiles/renderer.dir/src/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/Ray.cpp \
   /home/hellbats/Code/RayTracer/src/include/Ray.h \
+  /home/hellbats/Code/RayTracer/src/include/math.h \
   /usr/include/alloca.h \
   /usr/include/assert.h \
+  /usr/include/builtin_types.h \
   /usr/include/c++/13/bit \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
@@ -756,6 +759,7 @@ CMakeFiles/renderer.dir/src/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/Ray.cpp
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_relops.h \
   /usr/include/c++/13/bits/utility.h \
   /usr/include/c++/13/cassert \
   /usr/include/c++/13/cfloat \
@@ -767,6 +771,7 @@ CMakeFiles/renderer.dir/src/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/Ray.cpp
   /usr/include/c++/13/debug/debug.h \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/limits \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/tr1/bessel_function.tcc \
@@ -782,6 +787,16 @@ CMakeFiles/renderer.dir/src/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/Ray.cpp
   /usr/include/c++/13/tr1/riemann_zeta.tcc \
   /usr/include/c++/13/tr1/special_function_util.h \
   /usr/include/c++/13/type_traits \
+  /usr/include/c++/13/utility \
+  /usr/include/channel_descriptor.h \
+  /usr/include/crt/host_config.h \
+  /usr/include/crt/host_defines.h \
+  /usr/include/cuda_device_runtime_api.h \
+  /usr/include/cuda_runtime.h \
+  /usr/include/cuda_runtime_api.h \
+  /usr/include/device_types.h \
+  /usr/include/driver_functions.h \
+  /usr/include/driver_types.h \
   /usr/include/endian.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
@@ -918,12 +933,18 @@ CMakeFiles/renderer.dir/src/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/Ray.cpp
   /usr/include/glm/vec3.hpp \
   /usr/include/glm/vec4.hpp \
   /usr/include/glm/vector_relational.hpp \
+  /usr/include/library_types.h \
   /usr/include/limits.h \
   /usr/include/linux/limits.h \
   /usr/include/math.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdlib.h \
+  /usr/include/surface_types.h \
+  /usr/include/texture_types.h \
+  /usr/include/vector_functions.h \
+  /usr/include/vector_functions.hpp \
+  /usr/include/vector_types.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
@@ -998,6 +1019,7 @@ CMakeFiles/renderer.dir/src/Renderer.cu.o: /home/hellbats/Code/RayTracer/src/Ren
   /home/hellbats/Code/RayTracer/src/include/Ray.h \
   /home/hellbats/Code/RayTracer/src/include/Renderer.h \
   /home/hellbats/Code/RayTracer/src/include/Scene.h \
+  /home/hellbats/Code/RayTracer/src/include/math.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -1462,6 +1484,7 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
   /home/hellbats/Code/RayTracer/src/include/Ray.h \
   /home/hellbats/Code/RayTracer/src/include/Renderer.h \
   /home/hellbats/Code/RayTracer/src/include/Scene.h \
+  /home/hellbats/Code/RayTracer/src/include/math.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -1900,8 +1923,6 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
 
-/usr/include/c++/13/utility:
-
 /usr/include/c++/13/string_view:
 
 /usr/include/c++/13/streambuf:
@@ -1947,8 +1968,6 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
 /usr/include/c++/13/bits/stl_tempbuf.h:
-
-/usr/include/c++/13/bits/stl_relops.h:
 
 /usr/include/c++/13/bits/shared_ptr_atomic.h:
 
@@ -2004,6 +2023,8 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 
 /home/hellbats/Code/RayTracer/glfw/include/GLFW/glfw3.h:
 
+/home/hellbats/Code/RayTracer/src/UI.cpp:
+
 /usr/include/x86_64-linux-gnu/bits/stdint-least.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
@@ -2011,6 +2032,8 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 /usr/include/c++/13/bits/utility.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
+
+/usr/include/c++/13/bits/stl_relops.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
@@ -2181,6 +2204,10 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 /usr/include/glm/detail/type_mat4x3.hpp:
 
 /usr/include/c++/12/bits/stl_uninitialized.h:
+
+/home/hellbats/Code/RayTracer/external/glad/include/KHR/khrplatform.h:
+
+/usr/include/c++/13/cstddef:
 
 /usr/include/c++/13/vector:
 
@@ -2536,13 +2563,15 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 
 /usr/include/crt/math_functions.h:
 
+/home/hellbats/Code/RayTracer/external/glad/include/glad/glad.h:
+
+/usr/include/glm/detail/type_mat2x4.hpp:
+
 /usr/include/c++/12/cstdio:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/cpu_defines.h:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/gthr-default.h:
-
-/home/hellbats/Code/RayTracer/src/UI.cpp:
 
 /usr/include/glm/ext/matrix_float3x2.hpp:
 
@@ -2715,6 +2744,8 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
 /home/hellbats/Code/RayTracer/src/include/Ray.h:
+
+/home/hellbats/Code/RayTracer/src/include/math.h:
 
 /usr/include/c++/13/iostream:
 
@@ -2978,10 +3009,6 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 
 /usr/include/crt/sm_70_rt.hpp:
 
-/usr/include/glm/detail/type_mat2x4.hpp:
-
-/home/hellbats/Code/RayTracer/external/glad/include/glad/glad.h:
-
 /usr/include/crt/sm_80_rt.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
@@ -3134,6 +3161,8 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 
 /home/hellbats/Code/RayTracer/src/Ray.cpp:
 
+/usr/include/c++/13/utility:
+
 /home/hellbats/Code/RayTracer/src/include/Scene.h:
 
 /usr/include/c++/13/typeinfo:
@@ -3141,7 +3170,3 @@ CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp \
 /usr/include/glm/detail/type_vec4.inl:
 
 /usr/include/c++/12/bits/stl_vector.h:
-
-/usr/include/c++/13/cstddef:
-
-/home/hellbats/Code/RayTracer/external/glad/include/KHR/khrplatform.h:
