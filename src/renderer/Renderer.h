@@ -4,10 +4,10 @@
 #include <glm/glm.hpp>
 #include <cuda_runtime.h>
 #include "imgui.h"
-#include "include/Camera.h"
-#include "include/Ray.h"
-#include "include/Scene.h"
-#include "include/math.h"
+#include "scene/Camera.h"
+#include "scene/Ray.h"
+#include "scene/Scene.h"
+#include "utils/math.h"
 
 
 class Renderer

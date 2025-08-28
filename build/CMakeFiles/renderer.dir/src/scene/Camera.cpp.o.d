@@ -1,7 +1,8 @@
-CMakeFiles/renderer.dir/src/Camera.cpp.o: \
- /home/hellbats/Code/RayTracer/src/Camera.cpp /usr/include/stdc-predef.h \
- /home/hellbats/Code/RayTracer/src/include/Camera.h \
- /home/hellbats/Code/RayTracer/src/include/math.h \
+CMakeFiles/renderer.dir/src/scene/Camera.cpp.o: \
+ /home/hellbats/Code/RayTracer/src/scene/Camera.cpp \
+ /usr/include/stdc-predef.h \
+ /home/hellbats/Code/RayTracer/src/scene/Camera.h \
+ /home/hellbats/Code/RayTracer/src/scene/../utils/math.h \
  /usr/include/cuda_runtime.h /usr/include/crt/host_config.h \
  /usr/include/builtin_types.h /usr/include/device_types.h \
  /usr/include/crt/host_defines.h /usr/include/driver_types.h \

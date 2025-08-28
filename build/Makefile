@@ -407,125 +407,173 @@ imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.s
 .PHONY : imgui/imgui_widgets.cpp.s
 
-src/Camera.o: src/Camera.cpp.o
-.PHONY : src/Camera.o
+src/app/Application.o: src/app/Application.cpp.o
+.PHONY : src/app/Application.o
 
 # target to build an object file
-src/Camera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Camera.cpp.o
-.PHONY : src/Camera.cpp.o
+src/app/Application.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/app/Application.cpp.o
+.PHONY : src/app/Application.cpp.o
 
-src/Camera.i: src/Camera.cpp.i
-.PHONY : src/Camera.i
+src/app/Application.i: src/app/Application.cpp.i
+.PHONY : src/app/Application.i
 
 # target to preprocess a source file
-src/Camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Camera.cpp.i
-.PHONY : src/Camera.cpp.i
+src/app/Application.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/app/Application.cpp.i
+.PHONY : src/app/Application.cpp.i
 
-src/Camera.s: src/Camera.cpp.s
-.PHONY : src/Camera.s
+src/app/Application.s: src/app/Application.cpp.s
+.PHONY : src/app/Application.s
 
 # target to generate assembly for a file
-src/Camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Camera.cpp.s
-.PHONY : src/Camera.cpp.s
+src/app/Application.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/app/Application.cpp.s
+.PHONY : src/app/Application.cpp.s
 
-src/Geometry.o: src/Geometry.cu.o
-.PHONY : src/Geometry.o
+src/app/UI.o: src/app/UI.cpp.o
+.PHONY : src/app/UI.o
 
 # target to build an object file
-src/Geometry.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Geometry.cu.o
-.PHONY : src/Geometry.cu.o
+src/app/UI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/app/UI.cpp.o
+.PHONY : src/app/UI.cpp.o
 
-src/Geometry.i: src/Geometry.cu.i
-.PHONY : src/Geometry.i
+src/app/UI.i: src/app/UI.cpp.i
+.PHONY : src/app/UI.i
 
 # target to preprocess a source file
-src/Geometry.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Geometry.cu.i
-.PHONY : src/Geometry.cu.i
+src/app/UI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/app/UI.cpp.i
+.PHONY : src/app/UI.cpp.i
 
-src/Geometry.s: src/Geometry.cu.s
-.PHONY : src/Geometry.s
+src/app/UI.s: src/app/UI.cpp.s
+.PHONY : src/app/UI.s
 
 # target to generate assembly for a file
-src/Geometry.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Geometry.cu.s
-.PHONY : src/Geometry.cu.s
+src/app/UI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/app/UI.cpp.s
+.PHONY : src/app/UI.cpp.s
 
-src/Ray.o: src/Ray.cpp.o
-.PHONY : src/Ray.o
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
 
 # target to build an object file
-src/Ray.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Ray.cpp.o
-.PHONY : src/Ray.cpp.o
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-src/Ray.i: src/Ray.cpp.i
-.PHONY : src/Ray.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-src/Ray.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Ray.cpp.i
-.PHONY : src/Ray.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-src/Ray.s: src/Ray.cpp.s
-.PHONY : src/Ray.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-src/Ray.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Ray.cpp.s
-.PHONY : src/Ray.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
-src/Renderer.o: src/Renderer.cu.o
-.PHONY : src/Renderer.o
+src/renderer/Renderer.o: src/renderer/Renderer.cu.o
+.PHONY : src/renderer/Renderer.o
 
 # target to build an object file
-src/Renderer.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Renderer.cu.o
-.PHONY : src/Renderer.cu.o
+src/renderer/Renderer.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o
+.PHONY : src/renderer/Renderer.cu.o
 
-src/Renderer.i: src/Renderer.cu.i
-.PHONY : src/Renderer.i
+src/renderer/Renderer.i: src/renderer/Renderer.cu.i
+.PHONY : src/renderer/Renderer.i
 
 # target to preprocess a source file
-src/Renderer.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Renderer.cu.i
-.PHONY : src/Renderer.cu.i
+src/renderer/Renderer.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/renderer/Renderer.cu.i
+.PHONY : src/renderer/Renderer.cu.i
 
-src/Renderer.s: src/Renderer.cu.s
-.PHONY : src/Renderer.s
+src/renderer/Renderer.s: src/renderer/Renderer.cu.s
+.PHONY : src/renderer/Renderer.s
 
 # target to generate assembly for a file
-src/Renderer.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/Renderer.cu.s
-.PHONY : src/Renderer.cu.s
+src/renderer/Renderer.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/renderer/Renderer.cu.s
+.PHONY : src/renderer/Renderer.cu.s
 
-src/UI.o: src/UI.cpp.o
-.PHONY : src/UI.o
+src/scene/Camera.o: src/scene/Camera.cu.o
+.PHONY : src/scene/Camera.o
 
 # target to build an object file
-src/UI.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/UI.cpp.o
-.PHONY : src/UI.cpp.o
+src/scene/Camera.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Camera.cu.o
+.PHONY : src/scene/Camera.cu.o
 
-src/UI.i: src/UI.cpp.i
-.PHONY : src/UI.i
+src/scene/Camera.i: src/scene/Camera.cu.i
+.PHONY : src/scene/Camera.i
 
 # target to preprocess a source file
-src/UI.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/UI.cpp.i
-.PHONY : src/UI.cpp.i
+src/scene/Camera.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Camera.cu.i
+.PHONY : src/scene/Camera.cu.i
 
-src/UI.s: src/UI.cpp.s
-.PHONY : src/UI.s
+src/scene/Camera.s: src/scene/Camera.cu.s
+.PHONY : src/scene/Camera.s
 
 # target to generate assembly for a file
-src/UI.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/UI.cpp.s
-.PHONY : src/UI.cpp.s
+src/scene/Camera.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Camera.cu.s
+.PHONY : src/scene/Camera.cu.s
+
+src/scene/Geometry.o: src/scene/Geometry.cu.o
+.PHONY : src/scene/Geometry.o
+
+# target to build an object file
+src/scene/Geometry.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Geometry.cu.o
+.PHONY : src/scene/Geometry.cu.o
+
+src/scene/Geometry.i: src/scene/Geometry.cu.i
+.PHONY : src/scene/Geometry.i
+
+# target to preprocess a source file
+src/scene/Geometry.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Geometry.cu.i
+.PHONY : src/scene/Geometry.cu.i
+
+src/scene/Geometry.s: src/scene/Geometry.cu.s
+.PHONY : src/scene/Geometry.s
+
+# target to generate assembly for a file
+src/scene/Geometry.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Geometry.cu.s
+.PHONY : src/scene/Geometry.cu.s
+
+src/scene/Ray.o: src/scene/Ray.cpp.o
+.PHONY : src/scene/Ray.o
+
+# target to build an object file
+src/scene/Ray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Ray.cpp.o
+.PHONY : src/scene/Ray.cpp.o
+
+src/scene/Ray.i: src/scene/Ray.cpp.i
+.PHONY : src/scene/Ray.i
+
+# target to preprocess a source file
+src/scene/Ray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Ray.cpp.i
+.PHONY : src/scene/Ray.cpp.i
+
+src/scene/Ray.s: src/scene/Ray.cpp.s
+.PHONY : src/scene/Ray.s
+
+# target to generate assembly for a file
+src/scene/Ray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/src/scene/Ray.cpp.s
+.PHONY : src/scene/Ray.cpp.s
 
 # Help Target
 help:
@@ -566,21 +614,27 @@ help:
 	@echo "... imgui/imgui_widgets.o"
 	@echo "... imgui/imgui_widgets.i"
 	@echo "... imgui/imgui_widgets.s"
-	@echo "... src/Camera.o"
-	@echo "... src/Camera.i"
-	@echo "... src/Camera.s"
-	@echo "... src/Geometry.o"
-	@echo "... src/Geometry.i"
-	@echo "... src/Geometry.s"
-	@echo "... src/Ray.o"
-	@echo "... src/Ray.i"
-	@echo "... src/Ray.s"
-	@echo "... src/Renderer.o"
-	@echo "... src/Renderer.i"
-	@echo "... src/Renderer.s"
-	@echo "... src/UI.o"
-	@echo "... src/UI.i"
-	@echo "... src/UI.s"
+	@echo "... src/app/Application.o"
+	@echo "... src/app/Application.i"
+	@echo "... src/app/Application.s"
+	@echo "... src/app/UI.o"
+	@echo "... src/app/UI.i"
+	@echo "... src/app/UI.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/renderer/Renderer.o"
+	@echo "... src/renderer/Renderer.i"
+	@echo "... src/renderer/Renderer.s"
+	@echo "... src/scene/Camera.o"
+	@echo "... src/scene/Camera.i"
+	@echo "... src/scene/Camera.s"
+	@echo "... src/scene/Geometry.o"
+	@echo "... src/scene/Geometry.i"
+	@echo "... src/scene/Geometry.s"
+	@echo "... src/scene/Ray.o"
+	@echo "... src/scene/Ray.i"
+	@echo "... src/scene/Ray.s"
 .PHONY : help
 
 

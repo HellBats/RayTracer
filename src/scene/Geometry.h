@@ -1,5 +1,5 @@
 #pragma once
-#include "include/Ray.h"
+#include "Ray.h"
 #include <memory>
 #include <cuda_runtime.h>
 
@@ -8,7 +8,7 @@ typedef struct TriVertices {
     vec3 a, b, c;
 }TriVertices;
 
-enum class GeometryType { Sphere, Plane, Triangle };
+enum class GeometryType { SPHERE, PLANE, TRIANGLE };
 
 typedef struct Sphere {
     vec3 center;

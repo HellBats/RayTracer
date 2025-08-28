@@ -1,5 +1,5 @@
-#include "include/Renderer.h"
-
+#include "Renderer.h"
+#include <iostream>
 
 // ------------------ Forward declarations ------------------
 __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t width, uint32_t height);
@@ -22,27 +22,33 @@ __host__ __device__ u8vec3 Color(Geometry* hitObject, float &t)
     return u8vec3{255,255,255};
 }
 
-__host__ __device__ void RenderPixel(Scene* scene,uint32_t i, uint32_t j, u8vec3 &color,int width,int height)
+__host__ __device__ void RenderPixel(Scene* scene, uint32_t i, uint32_t j,
+                                     u8vec3 &color, int width, int height)
 {
     float scale = tan(scene->camera.fov * 0.5f);
     float Px = (2 * ((i + 0.5f) / width) - 1) * scale * scene->camera.aspect_ratio;
     float Py = (1 - 2 * ((j + 0.5f) / height)) * scale;
-
     float t;
     Geometry* hitObject = nullptr;
 
-    vec3 rayOrigin = vec3{0, 0, 0};
-    vec3 rayOriginWorld = rayOrigin;
-    vec3 rayPWorld = vec3{Px, Py, -1};
-    vec3 rayDirection = normalize(rayPWorld - rayOriginWorld);
-
-    Ray ray{rayOriginWorld,rayDirection};
-    Trace(scene,ray,&t,hitObject);
-    color = Color(hitObject,t);
+    // Recompute transformation (world matrix of the camera)
+    InitializeTransformation(&scene->camera);
+    // printf("%d",scene->object_count);
+    // Ray origin = camera position in world space
+    vec3 rayOriginWorld = scene->camera.position;
+    // Pixel point in camera space (on near plane z=-1)
+    vec4 pixelCam = {Px, Py, -1, 0};  // direction, w=0
+    // Rotate into world space using camera transform
+    pixelCam = scene->camera.transformation * pixelCam;
+    vec3 rayDirWorld = normalize(vec3{pixelCam.x,pixelCam.y,pixelCam.z});
+    Ray ray{rayOriginWorld, rayDirWorld};
+    Trace(scene, ray, &t, hitObject);
+    color = Color(hitObject, t);
 }
 
 void Renderer::RenderCPU(Scene &scene)
 {
+    // std::cout<<pixels.size()<<std::endl;
     for(int j=0;j<height;j++)
     {
         for(int i=0;i<width;i++)
@@ -104,7 +110,6 @@ void Renderer::RenderGPU(Scene &scene)
 
 __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t width, uint32_t height)
 {
-    
     int x = blockDim.x*blockIdx.x + threadIdx.x;
     int y = blockDim.y*blockIdx.y + threadIdx.y;
     if (x >= width || y >= height) return;

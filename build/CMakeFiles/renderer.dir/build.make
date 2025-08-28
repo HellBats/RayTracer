@@ -69,94 +69,127 @@ include CMakeFiles/renderer.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/renderer.dir/flags.make
 
-CMakeFiles/renderer.dir/src/Camera.cpp.o: CMakeFiles/renderer.dir/flags.make
-CMakeFiles/renderer.dir/src/Camera.cpp.o: /home/hellbats/Code/RayTracer/src/Camera.cpp
-CMakeFiles/renderer.dir/src/Camera.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/renderer.dir/src/Camera.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/Camera.cpp.o -MF CMakeFiles/renderer.dir/src/Camera.cpp.o.d -o CMakeFiles/renderer.dir/src/Camera.cpp.o -c /home/hellbats/Code/RayTracer/src/Camera.cpp
+CMakeFiles/renderer.dir/src/app/Application.cpp.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/app/Application.cpp.o: /home/hellbats/Code/RayTracer/src/app/Application.cpp
+CMakeFiles/renderer.dir/src/app/Application.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/renderer.dir/src/app/Application.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/app/Application.cpp.o -MF CMakeFiles/renderer.dir/src/app/Application.cpp.o.d -o CMakeFiles/renderer.dir/src/app/Application.cpp.o -c /home/hellbats/Code/RayTracer/src/app/Application.cpp
 
-CMakeFiles/renderer.dir/src/Camera.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/Camera.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/Camera.cpp > CMakeFiles/renderer.dir/src/Camera.cpp.i
+CMakeFiles/renderer.dir/src/app/Application.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/app/Application.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/app/Application.cpp > CMakeFiles/renderer.dir/src/app/Application.cpp.i
 
-CMakeFiles/renderer.dir/src/Camera.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/Camera.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/Camera.cpp -o CMakeFiles/renderer.dir/src/Camera.cpp.s
+CMakeFiles/renderer.dir/src/app/Application.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/app/Application.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/app/Application.cpp -o CMakeFiles/renderer.dir/src/app/Application.cpp.s
 
-CMakeFiles/renderer.dir/src/Ray.cpp.o: CMakeFiles/renderer.dir/flags.make
-CMakeFiles/renderer.dir/src/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/Ray.cpp
-CMakeFiles/renderer.dir/src/Ray.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/renderer.dir/src/Ray.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/Ray.cpp.o -MF CMakeFiles/renderer.dir/src/Ray.cpp.o.d -o CMakeFiles/renderer.dir/src/Ray.cpp.o -c /home/hellbats/Code/RayTracer/src/Ray.cpp
+CMakeFiles/renderer.dir/src/app/UI.cpp.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/app/UI.cpp.o: /home/hellbats/Code/RayTracer/src/app/UI.cpp
+CMakeFiles/renderer.dir/src/app/UI.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/renderer.dir/src/app/UI.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/app/UI.cpp.o -MF CMakeFiles/renderer.dir/src/app/UI.cpp.o.d -o CMakeFiles/renderer.dir/src/app/UI.cpp.o -c /home/hellbats/Code/RayTracer/src/app/UI.cpp
 
-CMakeFiles/renderer.dir/src/Ray.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/Ray.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/Ray.cpp > CMakeFiles/renderer.dir/src/Ray.cpp.i
+CMakeFiles/renderer.dir/src/app/UI.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/app/UI.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/app/UI.cpp > CMakeFiles/renderer.dir/src/app/UI.cpp.i
 
-CMakeFiles/renderer.dir/src/Ray.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/Ray.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/Ray.cpp -o CMakeFiles/renderer.dir/src/Ray.cpp.s
+CMakeFiles/renderer.dir/src/app/UI.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/app/UI.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/app/UI.cpp -o CMakeFiles/renderer.dir/src/app/UI.cpp.s
 
-CMakeFiles/renderer.dir/src/UI.cpp.o: CMakeFiles/renderer.dir/flags.make
-CMakeFiles/renderer.dir/src/UI.cpp.o: /home/hellbats/Code/RayTracer/src/UI.cpp
-CMakeFiles/renderer.dir/src/UI.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/renderer.dir/src/UI.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/UI.cpp.o -MF CMakeFiles/renderer.dir/src/UI.cpp.o.d -o CMakeFiles/renderer.dir/src/UI.cpp.o -c /home/hellbats/Code/RayTracer/src/UI.cpp
+CMakeFiles/renderer.dir/src/main.cpp.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/main.cpp.o: /home/hellbats/Code/RayTracer/src/main.cpp
+CMakeFiles/renderer.dir/src/main.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/renderer.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/main.cpp.o -MF CMakeFiles/renderer.dir/src/main.cpp.o.d -o CMakeFiles/renderer.dir/src/main.cpp.o -c /home/hellbats/Code/RayTracer/src/main.cpp
 
-CMakeFiles/renderer.dir/src/UI.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/UI.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/UI.cpp > CMakeFiles/renderer.dir/src/UI.cpp.i
+CMakeFiles/renderer.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/main.cpp > CMakeFiles/renderer.dir/src/main.cpp.i
 
-CMakeFiles/renderer.dir/src/UI.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/UI.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/UI.cpp -o CMakeFiles/renderer.dir/src/UI.cpp.s
+CMakeFiles/renderer.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/main.cpp -o CMakeFiles/renderer.dir/src/main.cpp.s
 
-CMakeFiles/renderer.dir/src/Geometry.cu.o: CMakeFiles/renderer.dir/flags.make
-CMakeFiles/renderer.dir/src/Geometry.cu.o: CMakeFiles/renderer.dir/includes_CUDA.rsp
-CMakeFiles/renderer.dir/src/Geometry.cu.o: /home/hellbats/Code/RayTracer/src/Geometry.cu
-CMakeFiles/renderer.dir/src/Geometry.cu.o: CMakeFiles/renderer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CUDA object CMakeFiles/renderer.dir/src/Geometry.cu.o"
-	/usr/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/Geometry.cu.o -MF CMakeFiles/renderer.dir/src/Geometry.cu.o.d -x cu -rdc=true -c /home/hellbats/Code/RayTracer/src/Geometry.cu -o CMakeFiles/renderer.dir/src/Geometry.cu.o
+CMakeFiles/renderer.dir/src/scene/Ray.cpp.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/scene/Ray.cpp.o: /home/hellbats/Code/RayTracer/src/scene/Ray.cpp
+CMakeFiles/renderer.dir/src/scene/Ray.cpp.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/renderer.dir/src/scene/Ray.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/scene/Ray.cpp.o -MF CMakeFiles/renderer.dir/src/scene/Ray.cpp.o.d -o CMakeFiles/renderer.dir/src/scene/Ray.cpp.o -c /home/hellbats/Code/RayTracer/src/scene/Ray.cpp
 
-CMakeFiles/renderer.dir/src/Geometry.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/renderer.dir/src/Geometry.cu.i"
+CMakeFiles/renderer.dir/src/scene/Ray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/renderer.dir/src/scene/Ray.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hellbats/Code/RayTracer/src/scene/Ray.cpp > CMakeFiles/renderer.dir/src/scene/Ray.cpp.i
+
+CMakeFiles/renderer.dir/src/scene/Ray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/renderer.dir/src/scene/Ray.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hellbats/Code/RayTracer/src/scene/Ray.cpp -o CMakeFiles/renderer.dir/src/scene/Ray.cpp.s
+
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o: CMakeFiles/renderer.dir/includes_CUDA.rsp
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o: /home/hellbats/Code/RayTracer/src/renderer/Renderer.cu
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CUDA object CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o"
+	/usr/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o -MF CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o.d -x cu -rdc=true -c /home/hellbats/Code/RayTracer/src/renderer/Renderer.cu -o CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o
+
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/renderer.dir/src/renderer/Renderer.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/renderer.dir/src/Geometry.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/renderer.dir/src/Geometry.cu.s"
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/renderer.dir/src/renderer/Renderer.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
-CMakeFiles/renderer.dir/src/Renderer.cu.o: CMakeFiles/renderer.dir/flags.make
-CMakeFiles/renderer.dir/src/Renderer.cu.o: CMakeFiles/renderer.dir/includes_CUDA.rsp
-CMakeFiles/renderer.dir/src/Renderer.cu.o: /home/hellbats/Code/RayTracer/src/Renderer.cu
-CMakeFiles/renderer.dir/src/Renderer.cu.o: CMakeFiles/renderer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CUDA object CMakeFiles/renderer.dir/src/Renderer.cu.o"
-	/usr/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/Renderer.cu.o -MF CMakeFiles/renderer.dir/src/Renderer.cu.o.d -x cu -rdc=true -c /home/hellbats/Code/RayTracer/src/Renderer.cu -o CMakeFiles/renderer.dir/src/Renderer.cu.o
+CMakeFiles/renderer.dir/src/scene/Camera.cu.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/scene/Camera.cu.o: CMakeFiles/renderer.dir/includes_CUDA.rsp
+CMakeFiles/renderer.dir/src/scene/Camera.cu.o: /home/hellbats/Code/RayTracer/src/scene/Camera.cu
+CMakeFiles/renderer.dir/src/scene/Camera.cu.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CUDA object CMakeFiles/renderer.dir/src/scene/Camera.cu.o"
+	/usr/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/scene/Camera.cu.o -MF CMakeFiles/renderer.dir/src/scene/Camera.cu.o.d -x cu -rdc=true -c /home/hellbats/Code/RayTracer/src/scene/Camera.cu -o CMakeFiles/renderer.dir/src/scene/Camera.cu.o
 
-CMakeFiles/renderer.dir/src/Renderer.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/renderer.dir/src/Renderer.cu.i"
+CMakeFiles/renderer.dir/src/scene/Camera.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/renderer.dir/src/scene/Camera.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/renderer.dir/src/Renderer.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/renderer.dir/src/Renderer.cu.s"
+CMakeFiles/renderer.dir/src/scene/Camera.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/renderer.dir/src/scene/Camera.cu.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/renderer.dir/src/scene/Geometry.cu.o: CMakeFiles/renderer.dir/flags.make
+CMakeFiles/renderer.dir/src/scene/Geometry.cu.o: CMakeFiles/renderer.dir/includes_CUDA.rsp
+CMakeFiles/renderer.dir/src/scene/Geometry.cu.o: /home/hellbats/Code/RayTracer/src/scene/Geometry.cu
+CMakeFiles/renderer.dir/src/scene/Geometry.cu.o: CMakeFiles/renderer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CUDA object CMakeFiles/renderer.dir/src/scene/Geometry.cu.o"
+	/usr/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/renderer.dir/src/scene/Geometry.cu.o -MF CMakeFiles/renderer.dir/src/scene/Geometry.cu.o.d -x cu -rdc=true -c /home/hellbats/Code/RayTracer/src/scene/Geometry.cu -o CMakeFiles/renderer.dir/src/scene/Geometry.cu.o
+
+CMakeFiles/renderer.dir/src/scene/Geometry.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CUDA source to CMakeFiles/renderer.dir/src/scene/Geometry.cu.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/renderer.dir/src/scene/Geometry.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CUDA source to assembly CMakeFiles/renderer.dir/src/scene/Geometry.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
 # Object files for target renderer
 renderer_OBJECTS = \
-"CMakeFiles/renderer.dir/src/Camera.cpp.o" \
-"CMakeFiles/renderer.dir/src/Ray.cpp.o" \
-"CMakeFiles/renderer.dir/src/UI.cpp.o" \
-"CMakeFiles/renderer.dir/src/Geometry.cu.o" \
-"CMakeFiles/renderer.dir/src/Renderer.cu.o"
+"CMakeFiles/renderer.dir/src/app/Application.cpp.o" \
+"CMakeFiles/renderer.dir/src/app/UI.cpp.o" \
+"CMakeFiles/renderer.dir/src/main.cpp.o" \
+"CMakeFiles/renderer.dir/src/scene/Ray.cpp.o" \
+"CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o" \
+"CMakeFiles/renderer.dir/src/scene/Camera.cu.o" \
+"CMakeFiles/renderer.dir/src/scene/Geometry.cu.o"
 
 # External object files for target renderer
 renderer_EXTERNAL_OBJECTS =
 
-CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/Camera.cpp.o
-CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/Ray.cpp.o
-CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/UI.cpp.o
-CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/Geometry.cu.o
-CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/Renderer.cu.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/app/Application.cpp.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/app/UI.cpp.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/main.cpp.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/scene/Ray.cpp.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/scene/Camera.cu.o
+CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/src/scene/Geometry.cu.o
 CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/build.make
 CMakeFiles/renderer.dir/cmake_device_link.o: /usr/lib/x86_64-linux-gnu/libcudart.so
 CMakeFiles/renderer.dir/cmake_device_link.o: /usr/lib/x86_64-linux-gnu/libcuda.so
@@ -168,7 +201,7 @@ CMakeFiles/renderer.dir/cmake_device_link.o: /usr/lib/x86_64-linux-gnu/libm.so
 CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/deviceLinkLibs.rsp
 CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/deviceObjects1.rsp
 CMakeFiles/renderer.dir/cmake_device_link.o: CMakeFiles/renderer.dir/dlink.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CUDA device code CMakeFiles/renderer.dir/cmake_device_link.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CUDA device code CMakeFiles/renderer.dir/cmake_device_link.o"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/renderer.dir/dlink.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -177,20 +210,24 @@ CMakeFiles/renderer.dir/build: CMakeFiles/renderer.dir/cmake_device_link.o
 
 # Object files for target renderer
 renderer_OBJECTS = \
-"CMakeFiles/renderer.dir/src/Camera.cpp.o" \
-"CMakeFiles/renderer.dir/src/Ray.cpp.o" \
-"CMakeFiles/renderer.dir/src/UI.cpp.o" \
-"CMakeFiles/renderer.dir/src/Geometry.cu.o" \
-"CMakeFiles/renderer.dir/src/Renderer.cu.o"
+"CMakeFiles/renderer.dir/src/app/Application.cpp.o" \
+"CMakeFiles/renderer.dir/src/app/UI.cpp.o" \
+"CMakeFiles/renderer.dir/src/main.cpp.o" \
+"CMakeFiles/renderer.dir/src/scene/Ray.cpp.o" \
+"CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o" \
+"CMakeFiles/renderer.dir/src/scene/Camera.cu.o" \
+"CMakeFiles/renderer.dir/src/scene/Geometry.cu.o"
 
 # External object files for target renderer
 renderer_EXTERNAL_OBJECTS =
 
-renderer: CMakeFiles/renderer.dir/src/Camera.cpp.o
-renderer: CMakeFiles/renderer.dir/src/Ray.cpp.o
-renderer: CMakeFiles/renderer.dir/src/UI.cpp.o
-renderer: CMakeFiles/renderer.dir/src/Geometry.cu.o
-renderer: CMakeFiles/renderer.dir/src/Renderer.cu.o
+renderer: CMakeFiles/renderer.dir/src/app/Application.cpp.o
+renderer: CMakeFiles/renderer.dir/src/app/UI.cpp.o
+renderer: CMakeFiles/renderer.dir/src/main.cpp.o
+renderer: CMakeFiles/renderer.dir/src/scene/Ray.cpp.o
+renderer: CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o
+renderer: CMakeFiles/renderer.dir/src/scene/Camera.cu.o
+renderer: CMakeFiles/renderer.dir/src/scene/Geometry.cu.o
 renderer: CMakeFiles/renderer.dir/build.make
 renderer: /usr/lib/x86_64-linux-gnu/libcudart.so
 renderer: /usr/lib/x86_64-linux-gnu/libcuda.so
@@ -201,7 +238,7 @@ renderer: /usr/lib/x86_64-linux-gnu/librt.a
 renderer: /usr/lib/x86_64-linux-gnu/libm.so
 renderer: CMakeFiles/renderer.dir/cmake_device_link.o
 renderer: CMakeFiles/renderer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable renderer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/hellbats/Code/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable renderer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/renderer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

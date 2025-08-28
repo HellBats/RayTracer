@@ -1,5 +1,5 @@
 #pragma once
-#include "include/math.h"
+#include "utils/math.h"
 #include <glm/glm.hpp>
 #include<cuda_runtime.h>
 

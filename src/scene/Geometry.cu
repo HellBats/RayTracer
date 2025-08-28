@@ -1,10 +1,10 @@
-#include "include/Geometry.h"
+#include "Geometry.h"
 #include<iostream>
 
 
 const float kepsilon = 1e-6; 
 
-bool solveQuadratic(float a, float b,float c,float *t0,float *t1)
+__host__ __device__ bool solveQuadratic(float a, float b,float c,float *t0,float *t1)
 {   
     float discriminant  = b*b-4*a*c;
     if(discriminant<0) return false;
@@ -39,11 +39,11 @@ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices)
 
 __host__ __device__ bool Intersect(Geometry& g,Ray& r, float& t) {
     switch (g.type) {
-        case GeometryType::Sphere:
+        case GeometryType::SPHERE:
             return IntersectSphere(g.sphere, r, t);
-        case GeometryType::Plane:
+        case GeometryType::PLANE:
             return IntersectPlane(g.plane, r, t);
-        case GeometryType::Triangle:
+        case GeometryType::TRIANGLE:
             return IntersectTriangle(g.triangle, r, t);
     }
     return false;

@@ -1,1 +1,1 @@
-CMakeFiles/renderer.dir/src/Camera.cpp.o CMakeFiles/renderer.dir/src/Ray.cpp.o CMakeFiles/renderer.dir/src/UI.cpp.o CMakeFiles/renderer.dir/src/Geometry.cu.o CMakeFiles/renderer.dir/src/Renderer.cu.o
+CMakeFiles/renderer.dir/src/app/Application.cpp.o CMakeFiles/renderer.dir/src/app/UI.cpp.o CMakeFiles/renderer.dir/src/main.cpp.o CMakeFiles/renderer.dir/src/scene/Ray.cpp.o CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o CMakeFiles/renderer.dir/src/scene/Camera.cu.o CMakeFiles/renderer.dir/src/scene/Geometry.cu.o

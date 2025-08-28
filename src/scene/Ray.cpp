@@ -1,4 +1,4 @@
-#include "include/Ray.h"
+#include "Ray.h"
 
 
 void IntializeRay(Ray* ray,vec3* origin,vec3* direction)

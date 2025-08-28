@@ -1,4 +1,4 @@
-CMakeFiles/renderer.dir/src/Renderer.cu.o : /home/hellbats/Code/RayTracer/src/Renderer.cu \
+CMakeFiles/renderer.dir/src/renderer/Renderer.cu.o : /home/hellbats/Code/RayTracer/src/renderer/Renderer.cu \
     /usr/include/stdc-predef.h \
     /usr/include/cuda_runtime.h \
     /usr/include/crt/host_config.h \
@@ -180,7 +180,7 @@ CMakeFiles/renderer.dir/src/Renderer.cu.o : /home/hellbats/Code/RayTracer/src/Re
     /usr/include/c++/12/utility \
     /usr/include/c++/12/bits/stl_relops.h \
     /usr/include/c++/12/initializer_list \
-    /home/hellbats/Code/RayTracer/src/include/Renderer.h \
+    /home/hellbats/Code/RayTracer/src/renderer/Renderer.h \
     /usr/include/c++/12/vector \
     /usr/include/c++/12/bits/allocator.h \
     /usr/include/x86_64-linux-gnu/c++/12/bits/c++allocator.h \
@@ -421,11 +421,11 @@ CMakeFiles/renderer.dir/src/Renderer.cu.o : /home/hellbats/Code/RayTracer/src/Re
     /usr/include/glm/detail/func_integer.inl \
     /home/hellbats/Code/RayTracer/imgui/imgui.h \
     /home/hellbats/Code/RayTracer/imgui/imconfig.h \
-    /home/hellbats/Code/RayTracer/src/include/Camera.h \
-    /home/hellbats/Code/RayTracer/src/include/math.h \
-    /home/hellbats/Code/RayTracer/src/include/Ray.h \
-    /home/hellbats/Code/RayTracer/src/include/Scene.h \
-    /home/hellbats/Code/RayTracer/src/include/Geometry.h \
+    /home/hellbats/Code/RayTracer/src/scene/Camera.h \
+    /home/hellbats/Code/RayTracer/src/scene/../utils/math.h \
+    /home/hellbats/Code/RayTracer/src/scene/Ray.h \
+    /home/hellbats/Code/RayTracer/src/scene/Scene.h \
+    /home/hellbats/Code/RayTracer/src/scene/Geometry.h \
     /usr/include/c++/12/memory \
     /usr/include/c++/12/bits/stl_tempbuf.h \
     /usr/include/c++/12/bits/stl_raw_storage_iter.h \

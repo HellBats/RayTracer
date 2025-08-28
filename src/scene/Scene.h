@@ -1,7 +1,6 @@
 #pragma once
-#include "include/Camera.h"
-#include "include/Geometry.h"
-#include <vector>
+#include "scene/Camera.h"
+#include "scene/Geometry.h"
 #include <memory>
 
 
@@ -14,8 +13,9 @@ typedef struct Scene {
         objects[object_count] = object;
         object_count++;
     };
-    void initialize(size_t size)
+    void initializeObjects(size_t size)
     {
+        object_count = 0;
         objects = (Geometry*)malloc(sizeof(Geometry)*size);
     }
 } Scene;
