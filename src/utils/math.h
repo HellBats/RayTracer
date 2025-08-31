@@ -18,6 +18,9 @@ struct vec3 {
     __host__ __device__ vec3 operator*(float scalar) const {
         return vec3{x * scalar, y * scalar, z * scalar};
     }
+    __host__ __device__ vec3 operator*(vec3 other) const {
+        return vec3{x * other.x, y * other.y, z * other.z};
+    }
 
     __host__ __device__ vec3& operator+=(const vec3 &other) {
         x += other.x; y += other.y; z += other.z;
@@ -171,4 +174,9 @@ __host__ __device__ __forceinline__ vec4 normalize(const vec4 &v) {
 __host__ __device__ __forceinline__ mat4 intialize(vec4 w, vec4 x, vec4 y, vec4 z) {
     return {w,x, y, z};
 }
+
+__host__ __device__ __forceinline__ u8vec3 convert_to_u8vec3(vec3 w) {
+    return u8vec3{(uint8_t)w.x,(uint8_t)w.y,(uint8_t)w.z};
+}
+
 

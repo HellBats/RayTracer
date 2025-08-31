@@ -1,11 +1,13 @@
 #pragma once
 #include "scene/Camera.h"
 #include "scene/Geometry.h"
+#include "scene/Light.h"
 #include <memory>
 
 
 typedef struct Scene {
     Camera camera;
+    PointLight light;
     Geometry* objects;
     uint32_t object_count;
 

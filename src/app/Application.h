@@ -7,6 +7,7 @@
 #include "UI.h"
 #include "utils/Timer.h"
 #include "utils/math.h"
+#include "scene/Light.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 

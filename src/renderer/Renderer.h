@@ -22,7 +22,7 @@ public:
     void RenderGPU(Scene &scene);
 };
 
-void RenderPixel(Scene* scene,uint32_t i, uint32_t j, glm::u8vec3 &color,int width, int height);
-bool Trace(Scene* scene,Ray &r, float* tNear,Geometry*& hitObject);
+__host__ __device__  void RenderPixel(Scene* scene,uint32_t i, uint32_t j, glm::u8vec3 &color,int width, int height);
+__host__ __device__ bool Trace(Scene* scene,Ray &r, float* tNear,Geometry*& hitObject,float& u, float& v);
 
 

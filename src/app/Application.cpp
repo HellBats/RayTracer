@@ -1,7 +1,5 @@
 #include "Application.h"
 
-
-
 bool HasCUDADevice() {
     int deviceCount = 0;
     cudaError_t error = cudaGetDeviceCount(&deviceCount);
@@ -38,11 +36,21 @@ Application::Application(int window_width, int window_height, int view_width, in
 
     // Setup scene
     InitializeCamera(&scene.camera, viewWidth, viewHeight, vec3{10,0,0}, vec3{0,0,0});
+    InitializePointLight(&scene.light,vec3{70,70,0},{1,0,0},1);
     scene.initializeObjects(10);
-    Geometry sphere;
+    vec3 albedo = vec3{0.18,0.18,0.18};
+    Geometry sphere,triangle;
     sphere.type = GeometryType::SPHERE;
     sphere.sphere.radius = 10;
     sphere.sphere.center = vec3{0,0,-60};
+    sphere.sphere.albedo = albedo;
+    triangle.type = GeometryType::TRIANGLE;
+    TriVertices tri;
+    tri.a = vec3{0,-1,-10};
+    tri.b = vec3{40,-1,-40};
+    tri.c = vec3{0,-1,-40};
+    InitalizeTriangle(triangle.triangle, tri,albedo);
+    // scene.push_objects(triangle);
     scene.push_objects(sphere);
 }
 
@@ -110,6 +118,12 @@ void Application::InitImGui() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
     ImGui::StyleColorsDark();
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.WindowBorderSize = 0.0f;
+    style.ChildBorderSize  = 0.0f;
+    style.PopupBorderSize  = 0.0f;
+    style.WindowPadding = ImVec2(0,0);
+    style.WindowRounding = 0.0f;
 }
 
 void Application::Cleanup() {

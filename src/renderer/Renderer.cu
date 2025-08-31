@@ -3,7 +3,7 @@
 
 // ------------------ Forward declarations ------------------
 __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t width, uint32_t height);
-__host__ __device__ bool Trace(Scene *scene,Ray &r, float* tNear,Geometry* &hitObject);
+__host__ __device__ bool Trace(Scene* scene,Ray &r, float* tNear,Geometry*& hitObject,float& u, float& v);
 
 // ----------------------------------------------------------
 
@@ -13,11 +13,33 @@ Renderer::Renderer(std::vector<unsigned char>& pixels,uint32_t width, uint32_t h
 
 }
 
-__host__ __device__ u8vec3 Color(Geometry* hitObject, float &t)
+__host__ __device__ u8vec3 Color(Geometry* hitObject, PointLight &light, Ray &ray, float &t, float &u , float &v)
 {
-    if(hitObject)   
+    if (hitObject)   
     {
-        return u8vec3{255,0,0};
+        if (hitObject->type == GeometryType::SPHERE)
+        {
+            // Intersection point
+            vec3 point  = CalculatePoint(ray, t);
+            // Surface normal (sphere)
+            vec3 normal = normalize(point - hitObject->sphere.center);
+
+            // Correct light direction: from surface → light
+            vec3 lightDir = normalize(light.position-point);
+
+            // Lambertian diffuse term
+            float light_reflection_intensity = light.intensity * fmaxf(0.0f, dot(normal, lightDir));
+
+            // Shaded color
+            vec3 hitColor = hitObject->sphere.albedo * light.color *
+                            light_reflection_intensity * (1.0f / M_PI);
+
+            // Normalize to [0,1] if needed
+            float maxVal = fmaxf(hitColor.x, fmaxf(hitColor.y, hitColor.z));
+            if (maxVal > 1.0f) hitColor = hitColor*(1.0f / maxVal);
+
+            return convert_to_u8vec3(hitColor * 255.0f);
+        }
     }
     return u8vec3{255,255,255};
 }
@@ -28,7 +50,7 @@ __host__ __device__ void RenderPixel(Scene* scene, uint32_t i, uint32_t j,
     float scale = tan(scene->camera.fov * 0.5f);
     float Px = (2 * ((i + 0.5f) / width) - 1) * scale * scene->camera.aspect_ratio;
     float Py = (1 - 2 * ((j + 0.5f) / height)) * scale;
-    float t;
+    float t,u=2,v=2;
     Geometry* hitObject = nullptr;
 
     // Recompute transformation (world matrix of the camera)
@@ -42,8 +64,8 @@ __host__ __device__ void RenderPixel(Scene* scene, uint32_t i, uint32_t j,
     pixelCam = scene->camera.transformation * pixelCam;
     vec3 rayDirWorld = normalize(vec3{pixelCam.x,pixelCam.y,pixelCam.z});
     Ray ray{rayOriginWorld, rayDirWorld};
-    Trace(scene, ray, &t, hitObject);
-    color = Color(hitObject, t);
+    Trace(scene, ray, &t, hitObject,u ,v);
+    color = Color(hitObject,scene->light,ray, t,u,v);
 }
 
 void Renderer::RenderCPU(Scene &scene)
@@ -123,12 +145,12 @@ __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t
     device_buffer[idx + 3] = 255;
 }
 
-__host__ __device__ bool Trace(Scene* scene,Ray &r, float* tNear,Geometry* &hitObject)
+__host__ __device__ bool Trace(Scene* scene,Ray &r, float* tNear,Geometry*& hitObject,float& u, float& v)
 {
     *tNear = std::numeric_limits<float>::max();
     for (int i=0;i<scene->object_count;i++) {
         float t = std::numeric_limits<float>::max(); 
-        if (Intersect(scene->objects[i],r, t) && t < *tNear) {
+        if (Intersect(scene->objects[i],r, t,u,v) && t < *tNear) {
             hitObject = &scene->objects[i];
             *tNear = t;
         }
