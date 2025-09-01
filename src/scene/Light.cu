@@ -2,9 +2,10 @@
 
 
 
-void InitializePointLight(PointLight* light,vec3 position, vec3 color, float intensity)
+void InitializeLight(Light* light,vec3 position, vec3 color, float intensity)
 {
-    light->position = position;
+    if(light->type==LightType::POINT) light->point_light.position = position;
+    else if(light->type==LightType::DISTANT) light->distant_light.direction = position;
     light->color = color;
     light->intensity = intensity;
 }

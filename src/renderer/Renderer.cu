@@ -13,7 +13,7 @@ Renderer::Renderer(std::vector<unsigned char>& pixels,uint32_t width, uint32_t h
 
 }
 
-__host__ __device__ u8vec3 Color(Geometry* hitObject, PointLight &light, Ray &ray, float &t, float &u , float &v)
+__host__ __device__ u8vec3 Color(Geometry* hitObject, Light &light, Ray &ray, float &t, float &u , float &v)
 {
     if (hitObject)   
     {
@@ -25,15 +25,68 @@ __host__ __device__ u8vec3 Color(Geometry* hitObject, PointLight &light, Ray &ra
             vec3 normal = normalize(point - hitObject->sphere.center);
 
             // Correct light direction: from surface → light
-            vec3 lightDir = normalize(light.position-point);
-
+            vec3 lightDir;
+            vec3 hitColor;
+            if(light.type==LightType::DISTANT)  
+            {
+                lightDir = normalize(light.distant_light.direction*(-1));
+            
             // Lambertian diffuse term
-            float light_reflection_intensity = light.intensity * fmaxf(0.0f, dot(normal, lightDir));
+                float light_reflection_intensity = light.intensity * fmaxf(0.0f, dot(normal, lightDir));
 
-            // Shaded color
-            vec3 hitColor = hitObject->sphere.albedo * light.color *
-                            light_reflection_intensity * (1.0f / M_PI);
+                // Shaded color
+                hitColor = hitObject->sphere.albedo * light.color *
+                                light_reflection_intensity * (1.0f / M_PI);
+            }
+            
+            else if(light.type==LightType::POINT)
+            {
+                lightDir = normalize(light.point_light.position-point);
+                // Lambertian diffuse term
+                float light_reflection_intensity = light.intensity * fmaxf(0.0f, dot(normal, lightDir));
 
+                // Shaded color
+                hitColor = hitObject->sphere.albedo * light.color *
+                                light_reflection_intensity * (1.0f / M_PI);
+            }
+            // Normalize to [0,1] if needed
+            float maxVal = fmaxf(hitColor.x, fmaxf(hitColor.y, hitColor.z));
+            if (maxVal > 1.0f) hitColor = hitColor*(1.0f / maxVal);
+
+            return convert_to_u8vec3(hitColor * 255.0f);
+        }
+        else if (hitObject->type == GeometryType::TRIANGLE)
+        {
+            // Intersection point
+            vec3 point  = CalculatePoint(ray, t);
+            // Surface normal (sphere)
+            vec3 normal = normalize(hitObject->triangle.normal);
+
+            // Correct light direction: from surface → light
+            vec3 lightDir;
+            vec3 hitColor;
+            if(light.type==LightType::DISTANT)  
+            {
+                lightDir = normalize(light.distant_light.direction*(-1));
+            
+            // Lambertian diffuse term
+                float light_reflection_intensity = light.intensity * fmaxf(0.0f, dot(normal, lightDir));
+
+                // Shaded color
+                hitColor = hitObject->triangle.albedo * light.color *
+                                light_reflection_intensity * (1.0f / M_PI);
+            }
+            
+            else if(light.type==LightType::POINT)
+            {
+                lightDir = normalize(light.point_light.position-point);
+                // Lambertian diffuse term
+                float light_reflection_intensity = light.intensity * fmaxf(0.0f, dot(normal, lightDir));
+
+                // Shaded color
+                hitColor = hitObject->triangle.albedo * light.color *
+                                light_reflection_intensity * (1.0f / M_PI);
+            }
             // Normalize to [0,1] if needed
             float maxVal = fmaxf(hitColor.x, fmaxf(hitColor.y, hitColor.z));
             if (maxVal > 1.0f) hitColor = hitColor*(1.0f / maxVal);

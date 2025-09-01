@@ -36,7 +36,8 @@ Application::Application(int window_width, int window_height, int view_width, in
 
     // Setup scene
     InitializeCamera(&scene.camera, viewWidth, viewHeight, vec3{10,0,0}, vec3{0,0,0});
-    InitializePointLight(&scene.light,vec3{70,70,0},{1,0,0},1);
+    scene.light.type = LightType::DISTANT;
+    InitializeLight(&scene.light,vec3{70,70,0},{1,0,0},100);
     scene.initializeObjects(10);
     vec3 albedo = vec3{0.18,0.18,0.18};
     Geometry sphere,triangle;
@@ -50,7 +51,7 @@ Application::Application(int window_width, int window_height, int view_width, in
     tri.b = vec3{40,-1,-40};
     tri.c = vec3{0,-1,-40};
     InitalizeTriangle(triangle.triangle, tri,albedo);
-    // scene.push_objects(triangle);
+    scene.push_objects(triangle);
     scene.push_objects(sphere);
 }
 
