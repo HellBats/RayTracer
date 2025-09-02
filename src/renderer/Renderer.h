@@ -8,6 +8,8 @@
 #include "scene/Ray.h"
 #include "scene/Scene.h"
 #include "utils/math.h"
+#include "utils/HitRecord.h"
+#include "shader/shader.h"
 
 
 class Renderer
@@ -23,6 +25,6 @@ public:
 };
 
 __host__ __device__  void RenderPixel(Scene* scene,uint32_t i, uint32_t j, glm::u8vec3 &color,int width, int height);
-__host__ __device__ bool Trace(Scene* scene,Ray &r, float* tNear,Geometry*& hitObject,float& u, float& v);
+__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r,Geometry*& hitObject,HitRecord &record);
 
 

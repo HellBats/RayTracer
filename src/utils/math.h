@@ -152,6 +152,11 @@ __host__ __device__ __forceinline__ vec3 normalize(const vec3 &v) {
     return vec3{0,0,0};
 }
 
+__host__ __device__ __forceinline__ float norm(const vec3 &v) {
+    float len = sqrtf(v.x*v.x + v.y*v.y + v.z*v.z);
+    return len;
+}
+
 
 
 

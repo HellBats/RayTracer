@@ -1,6 +1,7 @@
 #pragma once
 #include "../utils/math.h"
-
+#include "scene/Ray.h"
+#include "scene/Geometry.h"
 enum class LightType {POINT,DISTANT};
 
 struct PointLight
@@ -25,3 +26,5 @@ struct Light
 };
 
 void InitializeLight(Light* light,vec3 position, vec3 color, float intensity);
+
+__host__ __device__ float GetLightIntensity(Light &light,vec3 point, vec3 normal);

@@ -14,21 +14,19 @@ __host__ __device__ bool solveQuadratic(float a, float b,float c,float *t0,float
 }
 
 
-void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center, vec3 &albedo)
+void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center)
 {
     sphere.radius = radius;
     sphere.center = center;
-    sphere.albedo = albedo;
 }
 
-void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal, vec3 &albedo)
+void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal)
 {
     plane.point = point;
     plane.normal = normal;
-    plane.albedo = albedo;
 }
 
-void InitalizeTriangle(Triangle &triangle,TriVertices &vertices, vec3 &albedo)
+void InitalizeTriangle(Triangle &triangle,TriVertices &vertices)
 {
     triangle.vertices.a = vertices.a;
     triangle.vertices.b = vertices.b;
@@ -36,23 +34,22 @@ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices, vec3 &albedo)
     triangle.normal = cross((vertices.b-vertices.a),(vertices.c-vertices.a)); 
     triangle.origin_distance = -dot(vertices.a,triangle.normal);
     triangle.is_double_sided = true;
-    triangle.albedo = albedo;
 }
 
 
-__host__ __device__ bool Intersect(Geometry& g,Ray& r, float& t, float& u, float& v) {
+__host__ __device__ bool Intersect(Geometry& g,Ray& r,HitRecord &record) {
     switch (g.type) {
         case GeometryType::SPHERE:
-            return IntersectSphere(g.sphere, r, t,u,v);
+            return IntersectSphere(g.sphere, r, record);
         case GeometryType::PLANE:
-            return IntersectPlane(g.plane, r, t,u,v);
+            return IntersectPlane(g.plane, r, record);
         case GeometryType::TRIANGLE:
-            return IntersectTriangle(g.triangle, r, t, u, v);
+            return IntersectTriangle(g.triangle, r, record);
     }
     return false;
 }
 
-__host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,float& t,float &u, float &v)
+__host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,HitRecord &record)
 {
     vec3 L = r.origin - sphere.center;
     float a = dot(r.direction,r.direction);
@@ -61,34 +58,36 @@ __host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,float& t,float &u
     float t0,t1;
     if (!solveQuadratic(a, b, c, &t0, &t1)) return false;
     // printf("%f, %f\n",t0,t1);
-    t = t0>t1?t1:t0;
-    if(t>0) 
+    record.t = t0>t1?t1:t0;
+    record.normal = CalculatePoint(r,record.t)-sphere.center;
+    if(record.t>0) 
     {
-        u=2;
-        v=2;
+        record.u=2;
+        record.v=2;
         return true;
     }
     return false;
 }
 
 
-__host__ __device__ bool IntersectPlane(Plane &plane ,Ray& r,float &t,float &u, float &v)
+__host__ __device__ bool IntersectPlane(Plane &plane ,Ray& r,HitRecord &record)
 {
     float denominator = dot(r.direction,plane.normal);
     if(denominator>kepsilon)
     {
-        t = dot((plane.point - r.origin),plane.normal)/denominator;
-        if(t>=0)
+        record.t = dot((plane.point - r.origin),plane.normal)/denominator;
+        if(record.t>=0)
         {
-            u=2;
-            v=2;
+            record.normal = plane.normal;
+            record.u=2;
+            record.v=2;
             return true;
         }
     }
     return false;
 }
 
-__host__ __device__ bool IntersectTriangle(Triangle &triangle,Ray& r,float& t, float& u, float& v)
+__host__ __device__ bool IntersectTriangle(Triangle &triangle,Ray& r,HitRecord &record)
 {
     
     vec3 v0v1 = triangle.vertices.b - triangle.vertices.a;
@@ -102,12 +101,13 @@ __host__ __device__ bool IntersectTriangle(Triangle &triangle,Ray& r,float& t, f
     float invDet = 1 / det;
 
     vec3 tvec = r.origin - triangle.vertices.a;
-    u = dot(pvec,tvec) * invDet;
-    if (u < 0 || u > 1) return false;
+    record.u = dot(pvec,tvec) * invDet;
+    if (record.u < 0 || record.u > 1) return false;
 
     vec3 qvec = cross(v0v1,tvec);
-    v = dot(qvec,r.direction) * invDet;
-    if (v < 0 || u + v > 1) return false;
-    t = dot(qvec,v0v2) * invDet;
-    return t>0;
+    record.v = dot(qvec,r.direction) * invDet;
+    if (record.v < 0 || record.u + record.v > 1) return false;
+    record.normal = triangle.normal;
+    record.t = dot(qvec,v0v2) * invDet;
+    return record.t>0;
 }
