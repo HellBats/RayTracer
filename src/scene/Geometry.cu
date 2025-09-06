@@ -31,7 +31,7 @@ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices)
     triangle.vertices.a = vertices.a;
     triangle.vertices.b = vertices.b;
     triangle.vertices.c = vertices.c;
-    triangle.normal = cross((vertices.b-vertices.a),(vertices.c-vertices.a)); 
+    triangle.normal = normalize(cross((vertices.b-vertices.a),(vertices.c-vertices.a))); 
     triangle.origin_distance = -dot(vertices.a,triangle.normal);
     triangle.is_double_sided = true;
 }
@@ -59,7 +59,8 @@ __host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,HitRecord &record
     if (!solveQuadratic(a, b, c, &t0, &t1)) return false;
     // printf("%f, %f\n",t0,t1);
     record.t = t0>t1?t1:t0;
-    record.normal = CalculatePoint(r,record.t)-sphere.center;
+    record.normal = normalize(CalculatePoint(r,record.t)-sphere.center);
+    record.intersection = CalculatePoint(r,record.t);
     if(record.t>0) 
     {
         record.u=2;
@@ -78,7 +79,8 @@ __host__ __device__ bool IntersectPlane(Plane &plane ,Ray& r,HitRecord &record)
         record.t = dot((plane.point - r.origin),plane.normal)/denominator;
         if(record.t>=0)
         {
-            record.normal = plane.normal;
+            record.intersection = CalculatePoint(r,record.t);
+            record.normal = normalize(plane.normal);
             record.u=2;
             record.v=2;
             return true;
@@ -109,5 +111,6 @@ __host__ __device__ bool IntersectTriangle(Triangle &triangle,Ray& r,HitRecord &
     if (record.v < 0 || record.u + record.v > 1) return false;
     record.normal = triangle.normal;
     record.t = dot(qvec,v0v2) * invDet;
+    record.intersection = CalculatePoint(r,record.t);
     return record.t>0;
 }

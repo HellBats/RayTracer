@@ -121,9 +121,6 @@ struct mat4 {
 };
 
 
-
-
-
 struct u8vec3 {
     uint8_t r, g, b;
     // Operators
@@ -133,6 +130,11 @@ struct u8vec3 {
 __host__ __device__ __forceinline__ vec3 intialize(float x, float y, float z) {
     return {x, y, z};
 }
+
+__host__ __device__ inline vec3 operator*(float scalar,  const vec3 &other){
+        return vec3{scalar * other.x, scalar * other.y, scalar * other.z};
+    }
+
 // Free functions
 __host__ __device__ __forceinline__ float dot(const vec3 &a, const vec3 &b) {
     return a.x * b.x + a.y * b.y + a.z * b.z;
@@ -157,13 +159,23 @@ __host__ __device__ __forceinline__ float norm(const vec3 &v) {
     return len;
 }
 
-
-
-
-
-__host__ __device__ __forceinline__ vec4 intialize(float w, float x, float y, float z) {
-    return {w,x, y, z};
+__host__ __device__ __forceinline__ vec3 reflect(const vec3 &incident, const vec3 &normal) {
+    vec3 reflected = incident - 2*(dot(incident,normal))*normal;
+    return reflected;
 }
+
+
+
+
+__host__ __device__ __forceinline__ vec4 intialize(float x, float y, float z,float w) {
+    return {x, y, z,w};
+}
+
+
+__host__ __device__ inline vec4 operator*(float &scalar,  vec4 other){
+        return vec4{scalar * other.x, scalar * other.y, scalar * other.z,scalar * other.w};
+    }
+
 // Free functions
 __host__ __device__ __forceinline__ float dot(const vec4 &a, const vec4 &b) {
     return a.w * b.w+ a.x * b.x + a.y * b.y + a.z * b.z;
@@ -176,8 +188,8 @@ __host__ __device__ __forceinline__ vec4 normalize(const vec4 &v) {
 }
 
 
-__host__ __device__ __forceinline__ mat4 intialize(vec4 w, vec4 x, vec4 y, vec4 z) {
-    return {w,x, y, z};
+__host__ __device__ __forceinline__ mat4 intialize( vec4 x, vec4 y, vec4 z,vec4 w) {
+    return {x, y, z,w};
 }
 
 __host__ __device__ __forceinline__ u8vec3 convert_to_u8vec3(vec3 w) {

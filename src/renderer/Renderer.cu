@@ -20,7 +20,6 @@ __host__ __device__ void RenderPixel(Scene* scene, uint32_t i, uint32_t j,
     float scale = tan(scene->camera.fov * 0.5f);
     float Px = (2 * ((i + 0.5f) / width) - 1) * scale * scene->camera.aspect_ratio;
     float Py = (1 - 2 * ((j + 0.5f) / height)) * scale;
-    Geometry* hitObject = nullptr;
 
     // Recompute transformation (world matrix of the camera)
     InitializeTransformation(&scene->camera);
@@ -33,10 +32,7 @@ __host__ __device__ void RenderPixel(Scene* scene, uint32_t i, uint32_t j,
     pixelCam = scene->camera.transformation * pixelCam;
     vec3 rayDirWorld = normalize(vec3{pixelCam.x,pixelCam.y,pixelCam.z});
     Ray ray{rayOriginWorld, rayDirWorld};
-    HitRecord record;
-    record.u=2;
-    record.v=2;
-    color = Trace(scene, ray, hitObject,record);
+    color = Trace(scene, ray);
 }
 
 void Renderer::RenderCPU(Scene &scene)
@@ -128,21 +124,49 @@ __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t
 }
 
 
-__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r,Geometry*& hitObject,HitRecord &record)
+__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
 {
-    record.t = std::numeric_limits<float>::max();
-    u8vec3 color;
-    for(int d=0;d<1;d++)
+    vec3 background_color = vec3{1,1,1};
+    size_t depth = 1;
+    HitStack stack;
+    Geometry hitObject;
+    vec3 color = vec3{0,0,0};
+    HitRecord record;
+    FillIntersectionRecord(scene,r,record);
+    if(record.t==std::numeric_limits<float>::max()) return convert_to_u8vec3(background_color*255);
+    stack.Push(scene->lights,scene->lights_count,record);
+    int counter = scene->lights_count-1;
+    while(!stack.IsEmpty())
     {
-        for (int i=0;i<scene->object_count;i++) {
-            float t = record.t; 
-            if (Intersect(scene->objects[i],r, record) && record.t < t) {
-                hitObject = &scene->objects[i];
-                record.material = hitObject->material;
-                t = record.t;
-            }
-        }
-        color = Shade(hitObject,scene->lights,r, record,scene->lights_count);
+        r = stack.RayPop();
+        FillIntersectionRecord(scene,r,record);
+        HitRecord old_record = stack.RecordTop();
+        Shade(scene->lights[counter],r,record,old_record,color);
+        counter--;
+        // printf("%f\n",old_record.t);
     }
-    return color;
+    color.x = fminf(color.x, 1.0f);
+    color.y = fminf(color.y, 1.0f);
+    color.z = fminf(color.z, 1.0f);
+    return convert_to_u8vec3(color*255);
+}
+
+__host__ __device__ void FillIntersectionRecord(Scene* scene,Ray &r, HitRecord &record)
+{
+    HitRecord nearest;
+    Geometry hitObject;
+    record.u=2;
+    record.v=2;
+    record.ray_direction = r.direction; 
+    record.t = std::numeric_limits<float>::max();
+    nearest = record;
+    for (int i=0;i<scene->object_count;i++) 
+    {
+        if (Intersect(scene->objects[i],r, nearest) && record.t > nearest.t)
+        {
+            hitObject = scene->objects[i];
+            record = nearest;
+            record.material = hitObject.material;
+        }
+    }
 }

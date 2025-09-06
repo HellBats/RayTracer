@@ -11,6 +11,7 @@ struct HitRecord
     float v;
     vec3 intersection;
     vec3 normal;
+    vec3 ray_direction;
     Material material;
     bool front_face;
 };
