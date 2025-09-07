@@ -37,6 +37,27 @@ __host__ __device__ float GetLightIntensity(Light &light,vec3 point, vec3 normal
     
 }
 
+
+__host__ __device__ vec3 GetLightDirection(Light &light,vec3 point)
+{
+    vec3 lightDir;
+    float r2;
+    switch (light.type)
+    {
+    case LightType::DISTANT:
+        lightDir = normalize(light.distant_light.direction*(-1));
+        break;
+    
+    case LightType::POINT:
+        lightDir = light.point_light.position-point;
+        break;
+
+    default:
+        break;
+    }
+    return lightDir;
+}
+
 __host__ __device__ bool IsinShadow(Light &light,float &distance_to_intersection, vec3 origin_point)
 {
     switch (light.type)

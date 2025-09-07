@@ -3,7 +3,7 @@
 
 // ------------------ Forward declarations ------------------
 __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t width, uint32_t height);
-__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r,Geometry*& hitObject,HitRecord &record);
+__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r);
 
 // ----------------------------------------------------------
 
@@ -31,7 +31,7 @@ __host__ __device__ void RenderPixel(Scene* scene, uint32_t i, uint32_t j,
     // Rotate into world space using camera transform
     pixelCam = scene->camera.transformation * pixelCam;
     vec3 rayDirWorld = normalize(vec3{pixelCam.x,pixelCam.y,pixelCam.z});
-    Ray ray{rayOriginWorld, rayDirWorld};
+    Ray ray{.type = RayType::PrimaryRay,.origin = rayOriginWorld,.direction = rayDirWorld};
     color = Trace(scene, ray);
 }
 
@@ -124,32 +124,80 @@ __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t
 }
 
 
+__host__ __device__ vec3 Background(Ray& r) {
+    vec3 unit_dir = normalize(r.direction);
+    float t = 0.5f * (unit_dir.y + 1.0f); // map y from [-1,1] to [0,1]
+    vec3 color = (1.0f - t) * vec3{1.0, 1.0, 1.0} + t * vec3{0.5, 0.7, 1.0};
+    return color;
+}
+
 __host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
 {
-    vec3 background_color = vec3{1,1,1};
-    size_t depth = 1;
+    vec3 background_color = Background(r);
+    size_t MAX_DEPTH = 5;
+    int depth = MAX_DEPTH;
     HitStack stack;
-    Geometry hitObject;
-    vec3 color = vec3{0,0,0};
-    HitRecord record;
-    FillIntersectionRecord(scene,r,record);
-    if(record.t==std::numeric_limits<float>::max()) return convert_to_u8vec3(background_color*255);
-    stack.Push(scene->lights,scene->lights_count,record);
+    vec3 color = background_color;
+    float bias = 1e-4;
+    stack.PushRay(r);
     int counter = scene->lights_count-1;
-    while(!stack.IsEmpty())
+    while(!stack.RayIsEmpty())
     {
-        r = stack.RayPop();
-        FillIntersectionRecord(scene,r,record);
-        HitRecord old_record = stack.RecordTop();
-        Shade(scene->lights[counter],r,record,old_record,color);
-        counter--;
-        // printf("%f\n",old_record.t);
+        Ray new_ray = stack.RayPop();
+        HitRecord record;
+        FillIntersectionRecord(scene,new_ray,record);
+        if(record.t==std::numeric_limits<float>::max() && new_ray.type==RayType::PrimaryRay)
+        {
+            return convert_to_u8vec3(background_color*255);
+        }
+        if(new_ray.type==RayType::PrimaryRay || new_ray.type==RayType::ReflectionRay)
+        {
+            HitRecord old_record = stack.RecordTop();
+            for(int i=0;i<scene->lights_count;i++)
+            {
+                vec3 lightDir = GetLightDirection(scene->lights[i],record.intersection);
+                Ray next_ray = Ray{.type=RayType::ShadowRay,.origin=record.intersection+record.normal*bias,
+                    .direction=lightDir};
+                stack.PushRay(next_ray);
+            }
+            if(record.material.reflectivity>0 && depth>0)
+            {
+                Ray next_ray = Ray{.type=RayType::ReflectionRay,.origin=record.intersection+record.normal*bias,
+                    .direction=reflect(new_ray.direction,record.normal)};
+                stack.PushRay(next_ray);
+            }
+            stack.PushRecord(record);
+            depth--;
+        }
+        else
+        {
+            FillIntersectionRecord(scene,new_ray,record);
+            HitRecord old_record = stack.RecordTop();
+
+            vec3 localColor = vec3{0,0,0};   // diffuse shading accumulator
+            Shade(scene->lights[counter], new_ray, record, old_record, localColor);
+            counter--;
+
+            if(counter == -1)  
+            {
+                // Here 'color' is actually the reflection contribution returned
+                vec3 reflectionColor = color;  
+
+                // Combine reflection and local shading
+                color = (1 - old_record.material.reflectivity) * localColor 
+                    + old_record.material.reflectivity * reflectionColor;
+
+                counter = scene->lights_count - 1;
+                stack.RecordPop();
+            }
+        }
     }
     color.x = fminf(color.x, 1.0f);
     color.y = fminf(color.y, 1.0f);
     color.z = fminf(color.z, 1.0f);
     return convert_to_u8vec3(color*255);
 }
+
 
 __host__ __device__ void FillIntersectionRecord(Scene* scene,Ray &r, HitRecord &record)
 {

@@ -5,4 +5,7 @@
 struct Material
 {
     vec3 albedo;
+    float reflectivity;
+    float metallic;
+    float roughness;
 };

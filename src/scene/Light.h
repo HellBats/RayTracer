@@ -2,6 +2,8 @@
 #include "../utils/math.h"
 #include "scene/Ray.h"
 #include "scene/Geometry.h"
+
+
 enum class LightType {POINT,DISTANT};
 
 struct PointLight
@@ -30,3 +32,4 @@ void InitializeLight(Light* light,vec3 position, vec3 color, float intensity,flo
 
 __host__ __device__ float GetLightIntensity(Light &light,vec3 point, vec3 normal);
 __host__ __device__ bool IsinShadow(Light &light,float &distance_to_intersection,vec3 origin_point);
+__host__ __device__ vec3 GetLightDirection(Light &light,vec3 point);

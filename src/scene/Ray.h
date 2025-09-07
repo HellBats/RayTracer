@@ -3,11 +3,21 @@
 #include <glm/glm.hpp>
 #include<cuda_runtime.h>
 
+
+enum class RayType
+{
+    PrimaryRay,
+    ShadowRay,
+    ReflectionRay,
+};
+
 struct Ray
 {
+    RayType type;
     vec3 origin;
     vec3 direction;
 };
+
 
 void IntializeRay(Ray* ray,vec3* origin,vec3* direction);
 
