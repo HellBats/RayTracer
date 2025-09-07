@@ -134,13 +134,14 @@ __host__ __device__ vec3 Background(Ray& r) {
 __host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
 {
     vec3 background_color = Background(r);
-    size_t MAX_DEPTH = 5;
+    size_t MAX_DEPTH = 1;
     int depth = MAX_DEPTH;
     HitStack stack;
     vec3 color = background_color;
     float bias = 1e-4;
     stack.PushRay(r);
     int counter = scene->lights_count-1;
+    vec3 localColor = vec3{0,0,0}; 
     while(!stack.RayIsEmpty())
     {
         Ray new_ray = stack.RayPop();
@@ -152,6 +153,7 @@ __host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
         }
         if(new_ray.type==RayType::PrimaryRay || new_ray.type==RayType::ReflectionRay)
         {
+            localColor = vec3{0,0,0};
             HitRecord old_record = stack.RecordTop();
             for(int i=0;i<scene->lights_count;i++)
             {
@@ -173,8 +175,7 @@ __host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
         {
             FillIntersectionRecord(scene,new_ray,record);
             HitRecord old_record = stack.RecordTop();
-
-            vec3 localColor = vec3{0,0,0};   // diffuse shading accumulator
+              // diffuse shading accumulator
             Shade(scene->lights[counter], new_ray, record, old_record, localColor);
             counter--;
 
@@ -182,7 +183,6 @@ __host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
             {
                 // Here 'color' is actually the reflection contribution returned
                 vec3 reflectionColor = color;  
-
                 // Combine reflection and local shading
                 color = (1 - old_record.material.reflectivity) * localColor 
                     + old_record.material.reflectivity * reflectionColor;

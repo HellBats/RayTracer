@@ -36,14 +36,17 @@ Application::Application(int window_width, int window_height, int view_width, in
 
     // Setup scene
     InitializeCamera(&scene.camera, viewWidth, viewHeight, vec3{10,0,0}, vec3{0,0,0});
-    Light light1,light2;
-    light1.type = LightType::DISTANT;
+    Light light1,light2,light3;
+    light1.type = LightType::POINT;
     light2.type = LightType::POINT;
-    InitializeLight(&light1,vec3{0,0,-35},{0.8,0.8,0.8},50,1);
-    InitializeLight(&light2,vec3{0,30,0},{1,1,1},100,4);
+    light3.type = LightType::POINT;
+    InitializeLight(&light1,vec3{0,0,-35},{0.8,0.8,0.8},50,2);
+    InitializeLight(&light2,vec3{0,30,-60},{1,1,1},300,2);
+    InitializeLight(&light3,vec3{0,30,-40},{1,1,1},1000,4);
     scene.initializeObjectsAndLights(10,5);
     scene.push_lights(light1);
     scene.push_lights(light2);
+    // scene.push_lights(light3);
     vec3 albedo_sphere = vec3{0.7,0.18,0.18};
     vec3 albedo_triangle = vec3{0.8,0.8,0.8};
     float reflectivity = 0.3;
