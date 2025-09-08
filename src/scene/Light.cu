@@ -1,7 +1,7 @@
 #include "Light.h"
 #include<iostream>
 
-void InitializeLight(Light* light,vec3 position, vec3 color, float intensity, float intensity_multiplier)
+__host__ __device__ void InitializeLight(Light* light,vec3 position, vec3 color, float intensity, float intensity_multiplier)
 {
     if(light->type==LightType::POINT) light->point_light.position = position;
     else if(light->type==LightType::DISTANT) light->distant_light.direction = position;

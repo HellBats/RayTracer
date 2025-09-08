@@ -39,9 +39,9 @@ typedef struct Geometry {
     };
 }Geometry;
 
-void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center);
-void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal);
-void InitalizeTriangle(Triangle &triangle,TriVertices &vertices);
+__host__ __device__ void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center);
+__host__ __device__ void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal);
+__host__ __device__ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices);
 __host__ __device__ bool Intersect(Geometry& g,Ray& r,HitRecord &record);
 __host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,HitRecord &record);
 __host__ __device__ bool IntersectPlane(Plane &plane ,Ray& r,HitRecord &record);

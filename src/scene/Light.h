@@ -28,7 +28,7 @@ struct Light
     };
 };
 
-void InitializeLight(Light* light,vec3 position, vec3 color, float intensity,float intensity_multiplier);
+__host__ __device__  void InitializeLight(Light* light,vec3 position, vec3 color, float intensity,float intensity_multiplier);
 
 __host__ __device__ float GetLightIntensity(Light &light,vec3 point, vec3 normal);
 __host__ __device__ bool IsinShadow(Light &light,float &distance_to_intersection,vec3 origin_point);

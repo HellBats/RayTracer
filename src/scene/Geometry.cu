@@ -14,19 +14,19 @@ __host__ __device__ bool solveQuadratic(float a, float b,float c,float *t0,float
 }
 
 
-void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center)
+__host__ __device__ void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center)
 {
     sphere.radius = radius;
     sphere.center = center;
 }
 
-void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal)
+__host__ __device__ void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal)
 {
     plane.point = point;
     plane.normal = normal;
 }
 
-void InitalizeTriangle(Triangle &triangle,TriVertices &vertices)
+__host__ __device__ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices)
 {
     triangle.vertices.a = vertices.a;
     triangle.vertices.b = vertices.b;

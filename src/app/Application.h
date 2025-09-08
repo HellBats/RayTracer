@@ -30,5 +30,6 @@ private:
 
     Renderer renderer;
     Scene scene;
+    Scene* device_scene;
     bool render = false;
 };

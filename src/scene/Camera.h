@@ -13,5 +13,5 @@ struct Camera
     mat4 transformation;
 };
 
-void InitializeCamera(Camera *camera,uint32_t image_width,uint32_t image_height,vec3 position, vec3 rotation);
+__host__ __device__ void InitializeCamera(Camera *camera,uint32_t image_width,uint32_t image_height,vec3 position, vec3 rotation);
 __host__ __device__ void InitializeTransformation(Camera *camera);

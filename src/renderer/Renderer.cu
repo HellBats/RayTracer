@@ -54,58 +54,21 @@ void Renderer::RenderCPU(Scene &scene)
     return ;
 }
 
-void Renderer::RenderGPU(Scene &scene)
+void Renderer::RenderGPU(Scene &scene,unsigned char* device_buffer)
 {
     dim3 block(16,16);
     dim3 grid((width+block.x-1)/block.x, (height+block.y-1)/block.y);
-    // -------- Allocate GPU buffer --------
-    unsigned char* device_buffer;
-    cudaMalloc(&device_buffer, sizeof(unsigned char) * width * height * 4);
 
-    // -------- Copy objects --------
-    Geometry* d_objects;
-    cudaMalloc(&d_objects, sizeof(Geometry) * scene.object_count);
-    cudaMemcpy(d_objects, scene.objects,
-               sizeof(Geometry) * scene.object_count,
-               cudaMemcpyHostToDevice);
-
-
-    // -------- Copy lights --------
-    Light* d_lights;
-    cudaMalloc(&d_lights, sizeof(Light) * scene.lights_count);
-    cudaMemcpy(d_lights, scene.lights,
-               sizeof(Light) * scene.lights_count,
-               cudaMemcpyHostToDevice);
-
-    
-
-    // -------- Prepare patched Scene --------
-    Scene scene_copy = scene;        // copy original
-    scene_copy.objects = d_objects;  // patch objects pointer
-    scene_copy.lights = d_lights;   // patch lights pointer
-
-    // -------- Copy Scene to device --------
-    Scene* d_scene;
-    cudaMalloc(&d_scene, sizeof(Scene));
-    cudaMemcpy(d_scene, &scene_copy, sizeof(Scene), cudaMemcpyHostToDevice);
-    // printf("Host scene objects = %d\n", scene.object_count);
-    // -------- Launch kernel --------
-    RenderKernel<<<grid, block>>>(d_scene, device_buffer, width, height);
+    RenderKernel<<<grid, block>>>(&scene, device_buffer, width, height);
     cudaError_t err = cudaGetLastError();
     if (err != cudaSuccess) {
         printf("CUDA error: %s\n", cudaGetErrorString(err));
     }
     cudaDeviceSynchronize();
-
     // -------- Copy back pixels --------
     cudaMemcpy(pixels.data(), device_buffer,
                width * height * 4 * sizeof(unsigned char),
                cudaMemcpyDeviceToHost);
-
-    // -------- Cleanup --------
-    cudaFree(d_objects);
-    cudaFree(d_scene);
-    cudaFree(device_buffer);
 }
 
 __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t width, uint32_t height)

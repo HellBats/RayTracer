@@ -33,62 +33,55 @@ Application::Application(int window_width, int window_height, int view_width, in
         GL_UNSIGNED_BYTE,
         pixels.data()
     );
+    bool gpu=HasCUDADevice(); 
+    InitializeScene(scene,view_width,view_height,gpu);
+    if(gpu)
+    {
+        Scene *device_scene;
+        cudaMalloc(&device_scene, sizeof(Scene));
 
-    // Setup scene
-    InitializeCamera(&scene.camera, viewWidth, viewHeight, vec3{10,0,0}, vec3{0,0,0});
-    Light light1,light2,light3;
-    light1.type = LightType::POINT;
-    light2.type = LightType::POINT;
-    light3.type = LightType::POINT;
-    InitializeLight(&light1,vec3{0,0,-35},{0.8,0.8,0.8},50,2);
-    InitializeLight(&light2,vec3{0,30,-60},{1,1,1},300,2);
-    InitializeLight(&light3,vec3{0,30,-40},{1,1,1},1000,4);
-    scene.initializeObjectsAndLights(10,5);
-    scene.push_lights(light1);
-    scene.push_lights(light2);
-    // scene.push_lights(light3);
-    vec3 albedo_sphere = vec3{0.7,0.18,0.18};
-    vec3 albedo_triangle = vec3{0.8,0.8,0.8};
-    float reflectivity = 0.3;
-    Geometry sphere,triangle1,triangle2;
-    sphere.material.albedo = albedo_sphere;
-    triangle1.material.albedo = albedo_triangle;
-    triangle2.material.albedo = albedo_triangle;
-    sphere.material.reflectivity = reflectivity;
-    triangle1.material.reflectivity = reflectivity+0.6;
-    triangle2.material.reflectivity = reflectivity+0.6;
-    sphere.type = GeometryType::SPHERE;
-    sphere.sphere.radius = 10;
-    sphere.sphere.center = vec3{0,0,-60};
-    triangle1.type = GeometryType::TRIANGLE;
-    triangle2.type = GeometryType::TRIANGLE;
-    TriVertices tri1, tri2;
-    float x = -30,y=-11,z=-20,size_x = 60;
-    tri1.a = vec3{x,y,z};
-    tri1.b = vec3{x+size_x,y,z};
-    tri1.c = vec3{x,y,z-size_x};
-    tri2.a = vec3{x+size_x,y,z};
-    tri2.b = vec3{x+size_x,y,z-size_x};
-    tri2.c = vec3{x,y,z-size_x};
-    InitalizeTriangle(triangle1.triangle, tri1);
-    InitalizeTriangle(triangle2.triangle, tri2);
-    scene.push_objects(triangle1);
-    scene.push_objects(triangle2);
-    scene.push_objects(sphere);
+        // allocate & copy arrays
+        Geometry *d_objects;
+        Light *d_lights;
+        cudaMalloc(&d_objects, sizeof(Geometry) * scene.object_count);
+        cudaMalloc(&d_lights, sizeof(Light) * scene.lights_count);
+
+        cudaMemcpy(d_objects, scene.objects,
+                sizeof(Geometry) * scene.object_count,
+                cudaMemcpyHostToDevice);
+
+        cudaMemcpy(d_lights, scene.lights,
+                sizeof(Light) * scene.lights_count,
+                cudaMemcpyHostToDevice);
+
+        // patch a copy of Scene on host
+        Scene tmp = scene;
+        tmp.objects = d_objects;
+        tmp.lights = d_lights;
+
+        // copy that fixed struct to GPU
+        cudaMemcpy(device_scene, &tmp, sizeof(Scene), cudaMemcpyHostToDevice);
+
+        // now keep device_scene pointer around
+        this->device_scene = device_scene;
+    }
+    
 }
 
 Application::~Application() { Cleanup(); }
 
 void Application::Run() {
+    unsigned char* device_buffer;
+    bool gpu = HasCUDADevice();
+    // -------- Allocate GPU buffer --------
+    if(gpu) cudaMalloc(&device_buffer, sizeof(unsigned char) * viewWidth * viewHeight * 4); 
     while (!glfwWindowShouldClose(window)) {
         Timer timer;
         glfwPollEvents();
         if (render) {
             // std::fill(pixels.begin(), pixels.end(), 255);
-            if (HasCUDADevice()) 
-                renderer.RenderGPU(scene);
-            else 
-                renderer.RenderCPU(scene);
+            if (gpu) renderer.RenderGPU(*device_scene,device_buffer);
+            else  renderer.RenderCPU(scene);
             // render= !render;
         }
 
@@ -100,7 +93,27 @@ void Application::Run() {
 
         // UI
         UI::RenderPanels(texture, windowWidth, windowHeight, viewWidth, viewHeight, render,scene,timer.ElapsedMs());
+        Scene host_scene = scene;
+        Light *device_lights;    // device array for lights
+        Geometry *device_objects;
 
+        // allocate device memory for lights/objects
+        cudaMalloc(&device_lights, sizeof(Light) * host_scene.lights_count);
+        cudaMalloc(&device_objects, sizeof(Geometry) * host_scene.object_count);
+
+        // copy arrays into device arrays
+        cudaMemcpy(device_lights, host_scene.lights,
+                sizeof(Light) * host_scene.lights_count,
+                cudaMemcpyHostToDevice);
+
+        cudaMemcpy(device_objects, host_scene.objects,
+                sizeof(Geometry) * host_scene.object_count,
+                cudaMemcpyHostToDevice);
+        
+        host_scene.lights = device_lights;
+        host_scene.objects = device_objects;
+        cudaMemcpy(device_scene, &host_scene, sizeof(Scene), cudaMemcpyHostToDevice);
+        
         // Render
         ImGui::Render();
         glViewport(0, 0, windowWidth, windowHeight);
@@ -108,6 +121,7 @@ void Application::Run() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
+    if(gpu) cudaFree(device_buffer);
 }
 
 void Application::InitGLFW() {
@@ -150,6 +164,9 @@ void Application::InitImGui() {
 }
 
 void Application::Cleanup() {
+    cudaFree(scene.objects);
+    cudaFree(scene.lights);
+    cudaFree(&scene);
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

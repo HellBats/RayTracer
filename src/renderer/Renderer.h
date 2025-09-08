@@ -21,7 +21,7 @@ private:
 public:
     Renderer(std::vector<unsigned char>& pixels,uint32_t width, uint32_t height);
     void RenderCPU(Scene &scene);
-    void RenderGPU(Scene &scene);
+    void RenderGPU(Scene &scene,unsigned char* device_buffer);
 };
 
 __host__ __device__  void RenderPixel(Scene* scene,uint32_t i, uint32_t j, glm::u8vec3 &color,int width, int height);
