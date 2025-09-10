@@ -16,29 +16,36 @@ __host__ __device__ void InitializeScene(Scene &scene, uint32_t viewWidth, uint3
 {
     InitializeCamera(&scene.camera, viewWidth, viewHeight, vec3{10,0,0}, vec3{0,0,0});
     Light light1,light2,light3;
-    light1.type = LightType::POINT;
+    light1.type = LightType::DISTANT;
     light2.type = LightType::POINT;
     light3.type = LightType::POINT;
-    InitializeLight(&light1,vec3{0,0,-35},{0.8,0.8,0.8},50,2);
-    InitializeLight(&light2,vec3{0,30,-60},{1,1,1},300,2);
-    InitializeLight(&light3,vec3{0,30,-40},{1,1,1},1000,4);
+    InitializeLight(&light1,vec3{0,0,-35},{0.8,0.8,0.8},5,20);
+    InitializeLight(&light2,vec3{0,30,-60},{1,1,1},300,20);
+    InitializeLight(&light3,vec3{0,30,-40},{1,1,1},300,20);
     initializeObjectsAndLights(scene,10,5);
     scene.push_lights(light1);
     scene.push_lights(light2);
-    // scene.push_lights(light3);
-    vec3 albedo_sphere = vec3{0.7,0.18,0.18};
-    vec3 albedo_triangle = vec3{0.8,0.8,0.8};
-    float reflectivity = 0.3;
+    scene.push_lights(light3);
+    vec3 albedo_sphere = vec3{0.6,0.2,0.2};
+    vec3 albedo_triangle = vec3{0.5,0.5,0.5};
+    float reflectivity = 0.1;
+    float roughness = 1;
+    float refractive_index = 1.1;
+    float transparency = 0.9;
+    vec3 refractive_index_conductors_n = vec3{0.14f, 0.37f, 1.54f}; // gold (n)
+    vec3 refractive_index_conductors_k = vec3{3.1f, 2.7f, 1.9f};   // gold (k)
     Geometry sphere,triangle1,triangle2;
-    sphere.material.albedo = albedo_sphere;
-    triangle1.material.albedo = albedo_triangle;
-    triangle2.material.albedo = albedo_triangle;
-    sphere.material.reflectivity = reflectivity;
-    triangle1.material.reflectivity = reflectivity+0.6;
-    triangle2.material.reflectivity = reflectivity+0.6;
+    Material ball,plane;
+    InitializeMaterial(ball,albedo_sphere,refractive_index_conductors_n,refractive_index_conductors_k,
+    false,transparency,reflectivity,roughness,refractive_index);
+    InitializeMaterial(plane,albedo_triangle,refractive_index_conductors_n,refractive_index_conductors_k,
+    false,0,reflectivity,roughness,refractive_index);
     sphere.type = GeometryType::SPHERE;
     sphere.sphere.radius = 10;
     sphere.sphere.center = vec3{0,0,-60};
+    sphere.material = ball;
+    triangle1.material = plane;
+    triangle2.material = plane;
     triangle1.type = GeometryType::TRIANGLE;
     triangle2.type = GeometryType::TRIANGLE;
     TriVertices tri1, tri2;

@@ -25,7 +25,7 @@ public:
 };
 
 __host__ __device__  void RenderPixel(Scene* scene,uint32_t i, uint32_t j, glm::u8vec3 &color,int width, int height);
-__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r);
+__host__ __device__ u8vec3 Trace(Scene* scene, Ray r);
 __host__ __device__ void FillIntersectionRecord(Scene* scene,Ray &r, HitRecord &record);
 
 

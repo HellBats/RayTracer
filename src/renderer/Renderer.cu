@@ -3,14 +3,21 @@
 
 // ------------------ Forward declarations ------------------
 __global__ void RenderKernel(Scene* scene,unsigned char* device_buffer, uint32_t width, uint32_t height);
-__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r);
+__host__ __device__ u8vec3 Trace(Scene* scene, Ray r);
 
 // ----------------------------------------------------------
+
 
 Renderer::Renderer(std::vector<unsigned char>& pixels,uint32_t width, uint32_t height)
 :pixels(pixels), width(width), height(height)
 {
 
+}
+
+__host__ __device__ inline unsigned int seedFromIndices(int x, int y, int depth) {
+    // Combine pixel coords, depth, and frame index into one integer seed
+    unsigned int s = (x * 1973) ^ (y * 9277) ^ (depth * 26699);
+    return s;
 }
 
 
@@ -94,71 +101,81 @@ __host__ __device__ vec3 Background(Ray& r) {
     return color;
 }
 
-__host__ __device__ u8vec3 Trace(Scene* scene,Ray &r)
-{
-    vec3 background_color = Background(r);
-    size_t MAX_DEPTH = 1;
-    int depth = MAX_DEPTH;
-    HitStack stack;
-    vec3 color = background_color;
-    float bias = 1e-4;
-    stack.PushRay(r);
-    int counter = scene->lights_count-1;
-    vec3 localColor = vec3{0,0,0}; 
-    while(!stack.RayIsEmpty())
-    {
-        Ray new_ray = stack.RayPop();
-        HitRecord record;
-        FillIntersectionRecord(scene,new_ray,record);
-        if(record.t==std::numeric_limits<float>::max() && new_ray.type==RayType::PrimaryRay)
-        {
-            return convert_to_u8vec3(background_color*255);
-        }
-        if(new_ray.type==RayType::PrimaryRay || new_ray.type==RayType::ReflectionRay)
-        {
-            localColor = vec3{0,0,0};
-            HitRecord old_record = stack.RecordTop();
-            for(int i=0;i<scene->lights_count;i++)
-            {
-                vec3 lightDir = GetLightDirection(scene->lights[i],record.intersection);
-                Ray next_ray = Ray{.type=RayType::ShadowRay,.origin=record.intersection+record.normal*bias,
-                    .direction=lightDir};
-                stack.PushRay(next_ray);
-            }
-            if(record.material.reflectivity>0 && depth>0)
-            {
-                Ray next_ray = Ray{.type=RayType::ReflectionRay,.origin=record.intersection+record.normal*bias,
-                    .direction=reflect(new_ray.direction,record.normal)};
-                stack.PushRay(next_ray);
-            }
-            stack.PushRecord(record);
-            depth--;
-        }
-        else
-        {
-            FillIntersectionRecord(scene,new_ray,record);
-            HitRecord old_record = stack.RecordTop();
-              // diffuse shading accumulator
-            Shade(scene->lights[counter], new_ray, record, old_record, localColor);
-            counter--;
+__host__ __device__ u8vec3 Trace(Scene* scene, Ray r) {
+    const float EPS = 1e-4f;
+    const int MAX_DEPTH = 5;
+    vec3 color = vec3{0,0,0};
+    vec3 throughput = vec3{1,1,1};  // multiplicative weight along the path
 
-            if(counter == -1)  
-            {
-                // Here 'color' is actually the reflection contribution returned
-                vec3 reflectionColor = color;  
-                // Combine reflection and local shading
-                color = (1 - old_record.material.reflectivity) * localColor 
-                    + old_record.material.reflectivity * reflectionColor;
+    for (int depth = 0; depth < MAX_DEPTH; depth++) {
+        HitRecord rec;
+        FillIntersectionRecord(scene, r, rec);
 
-                counter = scene->lights_count - 1;
-                stack.RecordPop();
+        // If miss: add background contribution
+        if (rec.t == std::numeric_limits<float>::max()) {
+            color += throughput * Background(r);
+            break;
+        }
+
+        vec3 viewDir = normalize(-1*r.direction);
+        vec3 local = vec3{0,0,0};
+
+        // Direct lighting (shadow rays)
+        for (int i = 0; i < scene->lights_count; ++i) {
+            Light &L = scene->lights[i];
+            vec3 lightDir = normalize(GetLightDirection(L, rec.intersection));
+            Ray shadowRay{RayType::ShadowRay, rec.intersection + rec.normal * EPS, lightDir};
+            HitRecord shadowHit;
+            FillIntersectionRecord(scene, shadowRay, shadowHit);
+            if (shadowHit.t == std::numeric_limits<float>::max()) {
+                float Li = GetLightIntensity(L, rec.intersection, rec.normal);
+                local += CookTorranceBRDF(rec.normal, viewDir, lightDir, rec.material)
+                       * L.color * Li * fmaxf(dot(rec.normal, lightDir), 0.0f);
             }
+        }
+
+        // Apply diffuse/albedo contribution
+        color += throughput * (1.0f - rec.material.transparency) * local;
+
+        // Fresnel
+        float F = fresnel(-1*normalize(r.direction), rec.normal, rec.material.refractive_index);
+
+        // Reflection + refraction contributions
+        vec3 reflectDir = normalize(reflect(r.direction, rec.normal));
+        vec3 refractDir;
+        bool hasRefract = refract(r.direction, rec.normal, rec.material.refractive_index, refractDir);
+
+        if (rec.material.transparency > 0.0f && hasRefract) {
+            // Decide next ray probabilistically (path tracing style)
+            if (F > 0.0f && F < 1.0f) {
+                // Russian roulette between reflection/refraction
+                if (randomFloat((u_int32_t)(r.origin.x * 12.9898f + 
+                                        r.origin.y * 78.233f + 
+                                        r.origin.z * 37.719f)) < F) {
+                    r = Ray{RayType::ReflectionRay, rec.intersection + rec.normal * EPS, reflectDir};
+                    throughput = throughput* rec.material.reflectivity;
+                } else {
+                    r = Ray{RayType::RefractionRay, rec.intersection - rec.normal * EPS, normalize(refractDir)};
+                    throughput = throughput* rec.material.transparency;
+                }
+            } else if (F >= 1.0f) {
+                // pure reflection
+                r = Ray{RayType::ReflectionRay, rec.intersection + rec.normal * EPS, reflectDir};
+                throughput = throughput* rec.material.reflectivity;
+            } else {
+                // pure refraction
+                r = Ray{RayType::RefractionRay, rec.intersection - rec.normal * EPS, normalize(refractDir)};
+                throughput = throughput* rec.material.transparency;
+            }
+        } else if (rec.material.reflectivity > 0.0f) {
+            r = Ray{RayType::ReflectionRay, rec.intersection + rec.normal * EPS, reflectDir};
+            throughput = throughput* rec.material.reflectivity;
+        } else {
+            break; // opaque + no reflection → stop path
         }
     }
-    color.x = fminf(color.x, 1.0f);
-    color.y = fminf(color.y, 1.0f);
-    color.z = fminf(color.z, 1.0f);
-    return convert_to_u8vec3(color*255);
+
+    return convert_to_u8vec3(clampv(color, vec3{0,0,0}, vec3{1,1,1})*255);
 }
 
 

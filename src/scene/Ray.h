@@ -9,6 +9,7 @@ enum class RayType
     PrimaryRay,
     ShadowRay,
     ReflectionRay,
+    RefractionRay
 };
 
 struct Ray

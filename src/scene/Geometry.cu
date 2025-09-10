@@ -19,13 +19,6 @@ __host__ __device__ void InitalizeSphere(Sphere &sphere,float &radius, vec3 &cen
     sphere.radius = radius;
     sphere.center = center;
 }
-
-__host__ __device__ void InitalizePlane(Plane &plane,vec3 &point, vec3 &normal)
-{
-    plane.point = point;
-    plane.normal = normal;
-}
-
 __host__ __device__ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices)
 {
     triangle.vertices.a = vertices.a;
@@ -41,8 +34,6 @@ __host__ __device__ bool Intersect(Geometry& g,Ray& r,HitRecord &record) {
     switch (g.type) {
         case GeometryType::SPHERE:
             return IntersectSphere(g.sphere, r, record);
-        case GeometryType::PLANE:
-            return IntersectPlane(g.plane, r, record);
         case GeometryType::TRIANGLE:
             return IntersectTriangle(g.triangle, r, record);
     }
@@ -66,25 +57,6 @@ __host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,HitRecord &record
         record.u=2;
         record.v=2;
         return true;
-    }
-    return false;
-}
-
-
-__host__ __device__ bool IntersectPlane(Plane &plane ,Ray& r,HitRecord &record)
-{
-    float denominator = dot(r.direction,plane.normal);
-    if(denominator>kepsilon)
-    {
-        record.t = dot((plane.point - r.origin),plane.normal)/denominator;
-        if(record.t>=0)
-        {
-            record.intersection = CalculatePoint(r,record.t);
-            record.normal = normalize(plane.normal);
-            record.u=2;
-            record.v=2;
-            return true;
-        }
     }
     return false;
 }

@@ -22,6 +22,10 @@ struct vec3 {
         return vec3{x * other.x, y * other.y, z * other.z};
     }
 
+    __host__ __device__ vec3 operator/(vec3 other) const {
+        return vec3{x / other.x, y / other.y, z / other.z};
+    }
+
     __host__ __device__ vec3& operator+=(const vec3 &other) {
         x += other.x; y += other.y; z += other.z;
         return *this;
@@ -154,15 +158,13 @@ __host__ __device__ __forceinline__ vec3 normalize(const vec3 &v) {
     return vec3{0,0,0};
 }
 
+
 __host__ __device__ __forceinline__ float norm(const vec3 &v) {
     float len = sqrtf(v.x*v.x + v.y*v.y + v.z*v.z);
     return len;
 }
 
-__host__ __device__ __forceinline__ vec3 reflect(const vec3 &incident, const vec3 &normal) {
-    vec3 reflected = incident - 2*(dot(incident,normal))*normal;
-    return reflected;
-}
+
 
 
 
@@ -196,4 +198,26 @@ __host__ __device__ __forceinline__ u8vec3 convert_to_u8vec3(vec3 w) {
     return u8vec3{(uint8_t)w.x,(uint8_t)w.y,(uint8_t)w.z};
 }
 
+__host__ __device__ inline float clampf(float x, float a, float b) {
+    return fmaxf(a, fminf(b, x));
+}
+
+__host__ __device__ inline vec3 clampv(const vec3 &v, const vec3 &a, const vec3 &b) {
+    return vec3{ clampf(v.x, a.x, b.x),
+                 clampf(v.y, a.y, b.y),
+                 clampf(v.z, a.z, b.z) };
+}
+
+__host__ __device__ inline unsigned int wang_hash(unsigned int a) {
+    a = (a ^ 61) ^ (a >> 16);
+    a *= 9;
+    a = a ^ (a >> 4);
+    a *= 0x27d4eb2d;
+    a = a ^ (a >> 15);
+    return a;
+}
+
+__host__ __device__ inline float randomFloat(unsigned int seed) {
+    return (wang_hash(seed) & 0xFFFFFF) / float(0x1000000);
+}
 

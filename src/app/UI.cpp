@@ -33,29 +33,49 @@ void UI::RenderPanels(GLuint texture,int window_width, int window_height, int vi
         }
     }
     if(ImGui::CollapsingHeader("Light Controls"))
+    {
+        for(int i=0;i<scene.lights_count;i++)
         {
-            for(int i=0;i<scene.lights_count;i++)
+            ImGui::PushID(i);
+            if(ImGui::CollapsingHeader(("Light"+std::to_string(i)).c_str()))
             {
-                ImGui::PushID(i);
-                if(ImGui::CollapsingHeader("Light"))
+                ImGui::SliderFloat(("Intensity##" + std::to_string(i)).c_str(),&(scene.lights[i].intensity),0,200);
+                if(scene.lights[0].type==LightType::DISTANT)
                 {
-                    ImGui::SliderFloat(("Intensity##" + std::to_string(i)).c_str(),&(scene.lights[i].intensity),0,2000);
-                    if(scene.lights[0].type==LightType::DISTANT)
-                    {
-                        ImGui::SliderFloat("directionx",&(scene.lights[i].distant_light.direction.x),-200,60);
-                        ImGui::SliderFloat("directiony",&(scene.lights[i].distant_light.direction.y),-200,60);
-                        ImGui::SliderFloat("directionz",&(scene.lights[i].distant_light.direction.z),-200,60);
-                    }
-                    else
-                    {
-                        ImGui::SliderFloat("positionx",&(scene.lights[i].point_light.position.x),-200,60);
-                        ImGui::SliderFloat("positiony",&(scene.lights[i].point_light.position.y),-200,60);
-                        ImGui::SliderFloat("positionz",&(scene.lights[i].point_light.position.z),-200,60);
-                    }
+                    ImGui::SliderFloat("directionx",&(scene.lights[i].distant_light.direction.x),-200,60);
+                    ImGui::SliderFloat("directiony",&(scene.lights[i].distant_light.direction.y),-200,60);
+                    ImGui::SliderFloat("directionz",&(scene.lights[i].distant_light.direction.z),-200,60);
                 }
-                ImGui::PopID();
+                else
+                {
+                    ImGui::SliderFloat("positionx",&(scene.lights[i].point_light.position.x),-200,60);
+                    ImGui::SliderFloat("positiony",&(scene.lights[i].point_light.position.y),-200,60);
+                    ImGui::SliderFloat("positionz",&(scene.lights[i].point_light.position.z),-200,60);
+                }
             }
+            ImGui::PopID();
         }
+    }
+    if(ImGui::CollapsingHeader("Object Controls"))
+    {
+        for(int i=0;i<scene.object_count;i++)
+        {
+            ImGui::PushID(i);
+            if(ImGui::CollapsingHeader(("Object"+std::to_string(i)).c_str()))
+            {
+                ImGui::SliderFloat("Reflectivity",
+                    &(scene.objects[i].material.reflectivity),0,1);
+                ImGui::SliderFloat("Roughness",
+                    &(scene.objects[i].material.roughness),0,1);
+                ImGui::SliderFloat("Refractive Index",
+                    &(scene.objects[i].material.refractive_index),1,2);
+                ImGui::SliderFloat("Transparency",
+                    &(scene.objects[i].material.transparency),0,1);
+                
+            }
+            ImGui::PopID();
+        }
+    }
     if (ImGui::Button("Render")) render = !render;
     ImGui::Text("Frame Time: %.2f ms", ms);
     ImGui::End();
