@@ -127,11 +127,7 @@ __host__ __device__ u8vec3 Trace(Scene* scene, Ray r) {
             Ray shadowRay{RayType::ShadowRay, rec.intersection + rec.normal * EPS, lightDir};
             HitRecord shadowHit;
             FillIntersectionRecord(scene, shadowRay, shadowHit);
-            if (shadowHit.t == std::numeric_limits<float>::max()) {
-                float Li = GetLightIntensity(L, rec.intersection, rec.normal);
-                local += CookTorranceBRDF(rec.normal, viewDir, lightDir, rec.material)
-                       * L.color * Li * fmaxf(dot(rec.normal, lightDir), 0.0f);
-            }
+            Shade(L,r,shadowHit,rec,local);
         }
 
         // Apply diffuse/albedo contribution
@@ -149,9 +145,9 @@ __host__ __device__ u8vec3 Trace(Scene* scene, Ray r) {
             // Decide next ray probabilistically (path tracing style)
             if (F > 0.0f && F < 1.0f) {
                 // Russian roulette between reflection/refraction
-                if (randomFloat((u_int32_t)(r.origin.x * 12.9898f + 
-                                        r.origin.y * 78.233f + 
-                                        r.origin.z * 37.719f)) < F) {
+                if (randomFloat((u_int32_t)(r.direction.x * 12.9898f + 
+                                        r.direction.y * 78.233f + 
+                                        r.direction.z * 37.719f)) < F) {
                     r = Ray{RayType::ReflectionRay, rec.intersection + rec.normal * EPS, reflectDir};
                     throughput = throughput* rec.material.reflectivity;
                 } else {

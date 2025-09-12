@@ -51,7 +51,7 @@ __host__ __device__ vec3 CookTorranceBRDF(vec3 N, vec3 V, vec3 L, Material &mate
     } else {
         F0 = F0_dielectric(1.0f, material.refractive_index);
     }
-    F0 = vec3{0.95, 0.64, 0.54};
+    // F0 = vec3{0.95, 0.64, 0.54};
 
     vec3 H = normalize(V + L);
     float NdotH = saturate(dot(N, H));
@@ -78,13 +78,13 @@ __host__ __device__ vec3 CookTorranceBRDF(vec3 N, vec3 V, vec3 L, Material &mate
 
 
 __host__ __device__ void Shade(Light &light, Ray &ray, HitRecord &new_record, HitRecord &old_record,
-     vec3 &color)
+    vec3 &color)
 {
     if(!IsinShadow(light,new_record.t,ray.origin)){
         float light_reflection_intensity = GetLightIntensity(light,old_record.intersection,old_record.normal);
         // Shaded color
-        color += CookTorranceBRDF(old_record.normal,ray.direction,
-            GetLightDirection(light,old_record.intersection),old_record.material)
+        color += CookTorranceBRDF(old_record.normal,-1*ray.direction,
+            normalize(GetLightDirection(light,old_record.intersection)),old_record.material)
          * light.color *light_reflection_intensity;
     }
     return;

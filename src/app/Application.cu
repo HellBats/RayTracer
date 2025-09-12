@@ -81,8 +81,11 @@ void Application::Run() {
         if (render) {
             // std::fill(pixels.begin(), pixels.end(), 255);
             if (gpu) renderer.RenderGPU(*device_scene,device_buffer);
-            else  renderer.RenderCPU(scene);
-            // render= !render;
+            else  
+            {
+                renderer.RenderCPU(scene);
+                render= !render;
+            }
         }
 
         // Upload pixels to texture
@@ -93,6 +96,11 @@ void Application::Run() {
 
         // UI
         UI::RenderPanels(texture, windowWidth, windowHeight, viewWidth, viewHeight, render,scene,timer.ElapsedMs());
+        
+        /* Host (CPU) cannot dereference the gpu pointers so first create a scene on host which will contain
+        pointers of light and geometry to the memory in GPU which are copied from Host scene and then we copy
+        this host scene to device_scene so that there is no need of dereferencing these pointers*/
+        
         Scene host_scene = scene;
         Light *device_lights;    // device array for lights
         Geometry *device_objects;

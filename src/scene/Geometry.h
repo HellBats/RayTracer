@@ -35,6 +35,8 @@ typedef struct Geometry {
 
 __host__ __device__ void InitalizeSphere(Sphere &sphere,float &radius, vec3 &center);
 __host__ __device__ void InitalizeTriangle(Triangle &triangle,TriVertices &vertices);
+__host__ __device__ void InitializePlane(TriVertices *vertices,vec3 center,vec3 normal,float x, float y);
+__host__ __device__ void InitializeCube(TriVertices *vertices,vec3 point,float x, float y,float z);
 __host__ __device__ bool Intersect(Geometry& g,Ray& r,HitRecord &record);
 __host__ __device__ bool IntersectSphere(Sphere &sphere,Ray& r,HitRecord &record);
 __host__ __device__ bool IntersectTriangle(Triangle &traingle,Ray& r,HitRecord &record);
